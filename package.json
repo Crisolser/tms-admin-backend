@@ -1,0 +1,44 @@
+{
+  "name": "tms-admin-backend",
+  "version": "1.0.0",
+  "description": "Apis para panel de administración del TMS",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Crisolser/tms-admin-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Crisolser/tms-admin-backend/issues"
+  },
+  "homepage": "https://github.com/Crisolser/tms-admin-backend#readme",
+  "imports": {
+    "#config/*": "./src/config/*.js",
+    "#models/*": "./src/models/*.js",
+    "#middlewares": "./src/middlewares/index.js",
+    "#helpers": "./src/helpers/index.js",
+    "#app": "./src/app.js",
+    "#repository/*": "./src/repository/*.js",
+    "#constants": "./src/constants/index.js"
+  },
+  "dependencies": {
+    "@scalar/express-api-reference": "^0.8.30",
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "morgan": "^1.10.1",
+    "pg": "^8.16.3",
+    "sequelize": "^6.37.7",
+    "zod": "^4.2.1",
+    "zod-openapi": "^5.4.5"
+  }
+}
