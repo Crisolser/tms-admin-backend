@@ -1,0 +1,13 @@
+export const ACCOUNT_STATUS = {
+  ACTIVE: 1,
+  INACTIVE: 2,
+  SUSPENDED: 3,
+  PENDING: 4,
+};
+
+export const STATUS_DESCRIPTIONS = {
+  [ACCOUNT_STATUS.ACTIVE]: 'Active',
+  [ACCOUNT_STATUS.INACTIVE]: 'Inactive',
+  [ACCOUNT_STATUS.SUSPENDED]: 'Suspended',
+  [ACCOUNT_STATUS.PENDING]: 'Pending',
+};

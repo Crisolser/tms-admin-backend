@@ -21,12 +21,13 @@
   "homepage": "https://github.com/Crisolser/tms-admin-backend#readme",
   "imports": {
     "#config/*": "./src/config/*.js",
-    "#models/*": "./src/models/*.js",
+    "#models": "./src/models/index.js",
     "#middlewares": "./src/middlewares/index.js",
     "#helpers": "./src/helpers/index.js",
     "#app": "./src/app.js",
     "#repository/*": "./src/repository/*.js",
-    "#constants": "./src/constants/index.js"
+    "#constants": "./src/constants/index.js",
+    "#enums": "./src/enums/index.js"
   },
   "dependencies": {
     "@scalar/express-api-reference": "^0.8.30",
