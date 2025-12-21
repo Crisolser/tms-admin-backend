@@ -39,6 +39,18 @@ const envSchema = z.object({
             issue.input === undefined ? 'La contraseña de la base de datos es obligatoria' : 'La contraseña de la base de datos debe ser una cadena',
         })
         .min(1, 'La contraseña de la base de datos no puede estar vacía'),
+    AUTH_ACCESS_TOKEN_EXPIRATION: z
+        .string()
+        .regex(/^\d+[smhd]$/, {
+        message: 'Debe ser un número seguido de [s:segundos, m:minutos, h:horas, d:días] (ej: 10m, 3s, 1h, 2d)',
+        })
+        .default('10m'),
+    AUTH_REFRESH_TOKEN_EXPIRATION: z
+        .string()
+        .regex(/^\d+[smhd]$/, {
+        message: 'Debe ser un número seguido de [s:segundos, m:minutos, h:horas, d:días] (ej: 10m, 3s, 1h, 2d)',
+        })
+        .default('3d'),
     SECRET_JWT: z
         .string()
         .default('TRACKERGUY#12345'),
