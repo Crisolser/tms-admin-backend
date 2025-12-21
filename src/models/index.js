@@ -6,6 +6,7 @@ import Permission from './permission.js';
 import Client from './client.js';
 import ClientWarehouse from './client-warehouse.js';
 import ClientApiToken from './client-api-token.js';
+import ClientWebhook from './client-webhook.js';
 import Courier from './courier.js';
 import Vehicle from './vehicle.js';
 import CourierDocument from './courier-document.js';
@@ -24,6 +25,7 @@ const models = {
     Client,
     ClientWarehouse,
     ClientApiToken,
+    ClientWebhook,
     Courier,
     Vehicle,
     CourierDocument,

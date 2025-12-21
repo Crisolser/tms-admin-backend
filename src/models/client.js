@@ -70,6 +70,10 @@ Client.associate = (models) => {
         foreignKey: 'client_id',
         as: 'packages',
     });
+    Client.hasMany(models.ClientWebhook, {
+        foreignKey: 'client_id',
+        as: 'webhooks',
+    });
 }
 
 export default Client;
