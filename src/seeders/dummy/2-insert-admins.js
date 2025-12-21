@@ -23,11 +23,11 @@ export const insertAdmins = async () => {
         const adminRole = allRoles.find(role => role.name === 'Admin');
         const operatorRole = allRoles.find(role => role.name === 'Operator');
         const salesRole = allRoles.find(role => role.name === 'Sales');
-        insertedAdmins.forEach(async (admin) => {
+        await Promise.all(insertedAdmins.map(async (admin) => {
             if (admin.email === 'admin@gmail.com') await admin.addRole(adminRole);
             if (admin.email === 'operator@gmail.com') await admin.addRole(operatorRole);
             if (admin.email === 'sales@gmail.com') await admin.addRole(salesRole);
-        });
+        }));
 
         console.log(SEEDER_MESSAGES.ADMINS.INSERTED(insertedAdmins.length));
     } catch (error) {

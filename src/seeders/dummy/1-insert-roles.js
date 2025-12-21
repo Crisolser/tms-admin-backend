@@ -18,11 +18,11 @@ export const insertRoles = async () => {
         const operationPermissions = allPermissions.filter(perm => perm.action === 'read');
         const salePermissions = allPermissions.filter(perm => perm.module === 'client');
 
-        insertedRoles.forEach(async (role) => {
+        await Promise.all(insertedRoles.map(async (role) => {
             if (role.name === 'Admin') await role.setPermissions(allPermissions);
             if (role.name === 'Operator') await role.setPermissions(operationPermissions);
             if (role.name === 'Sales') await role.setPermissions(salePermissions);
-        });
+        }));
 
         console.log(SEEDER_MESSAGES.ROLES.INSERTED(insertedRoles.length));
     }
