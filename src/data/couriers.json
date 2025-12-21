@@ -1,0 +1,29 @@
+[
+    {
+        "name": "Juan",
+        "paternal_surname": "Perez",
+        "maternal_surname": "Lopez",
+        "email": "juan.perez@example.com",
+        "phone": "5551112222",
+        "password": "Password#123",
+        "vehicle_id": 1
+    },
+    {
+        "name": "Maria",
+        "paternal_surname": "Gomez",
+        "maternal_surname": "Martinez",
+        "email": "maria.gomez@example.com",
+        "phone": "5553334444",
+        "password": "Password#456",
+        "vehicle_id": 2
+    },
+    {
+        "name": "Carlos",
+        "paternal_surname": "Rodriguez",
+        "maternal_surname": "Sanchez",
+        "email": "carlos.rodriguez@example.com",
+        "phone": "5555556666",
+        "password": "Password#789",
+        "vehicle_id": 3
+    }
+]

@@ -1,0 +1,212 @@
+[
+    {
+        "code": "admin:read",
+        "module": "admin",
+        "action": "read",
+        "description": "Listar y detalle de administradores"
+    },
+    {
+        "code": "admin:create",
+        "module": "admin",
+        "action": "create",
+        "description": "Crear nuevos administradores"
+    },
+    {
+        "code": "admin:update",
+        "module": "admin",
+        "action": "update",
+        "description": "Actualizar información de los administradores"
+    },
+    {
+        "code": "admin:delete",
+        "module": "admin",
+        "action": "delete",
+        "description": "Eliminar administradores"
+    },
+    {
+        "code": "admin:assign-roles",
+        "module": "admin",
+        "action": "assign-roles",
+        "description": "Asignar roles a administradores"
+    },
+    {
+        "code": "admin:change-password",
+        "module": "admin",
+        "action": "change-password",
+        "description": "Cambiar la contraseña de administradores"
+    },
+    {
+        "code": "roele:read",
+        "module": "role",
+        "action": "read",
+        "description": "Listar y detalle de roles"
+    },
+    {
+        "code": "role:create",
+        "module": "role",
+        "action": "create",
+        "description": "Crear nuevos roles"
+    },
+    {
+        "code": "role:update",
+        "module": "role",
+        "action": "update",
+        "description": "Actualizar información de los roles"
+    },
+    {
+        "code": "role:delete",
+        "module": "role",
+        "action": "delete",
+        "description": "Eliminar roles"
+    },
+    {
+        "code": "role:assign-permissions",
+        "module": "role",
+        "action": "assign-permissions",
+        "description": "Asignar permisos a roles"
+    },
+    {
+        "code": "permission:read",
+        "module": "permission",
+        "action": "read",
+        "description": "Listar y detalle de permisos"
+    },
+    {
+        "code": "courier:read",
+        "module": "courier",
+        "action": "read",
+        "description": "Listar y detalle de mensajeros"
+    },
+    {
+        "code": "courier:create",
+        "module": "courier",
+        "action": "create",
+        "description": "Crear nuevos mensajeros"
+    },
+    {
+        "code": "courier:update",
+        "module": "courier",
+        "action": "update",
+        "description": "Actualizar información de los mensajeros"
+    },
+    {
+        "code": "courier:delete",
+        "module": "courier",
+        "action": "delete",
+        "description": "Eliminar mensajeros"
+    },
+    {
+        "code": "courier:assign-documents",
+        "module": "courier",
+        "action": "assign-documents",
+        "description": "Asignar documentos a mensajeros"
+    },
+    {
+        "code": "courier:change-status",
+        "module": "courier",
+        "action": "change-status",
+        "description": "Cambiar el estado de los mensajeros"
+    },
+    {
+        "code": "courier:change-password",
+        "module": "courier",
+        "action": "change-password",
+        "description": "Cambiar la contraseña de mensajeros"
+    },
+    {
+        "code": "client:read",
+        "module": "client",
+        "action": "read",
+        "description": "Listar y detalle de clientes"
+    },
+    {
+        "code": "client:create",
+        "module": "client",
+        "action": "create",
+        "description": "Crear nuevos clientes"
+    },
+    {
+        "code": "client:update",
+        "module": "client",
+        "action": "update",
+        "description": "Actualizar información de los clientes"
+    },
+    {
+        "code": "client:delete",
+        "module": "client",
+        "action": "delete",
+        "description": "Eliminar clientes"
+    },
+    {
+        "code": "client:manage-api-token",
+        "module": "client",
+        "action": "api-token",
+        "description": "Generar y gestionar tokens API para clientes"
+    },
+    {
+        "code": "client:change-password",
+        "module": "client",
+        "action": "change-password",
+        "description": "Cambiar la contraseña de clientes"
+    },
+    {
+        "code": "client:manage-webhooks",
+        "module": "client",
+        "action": "manage-webhooks",
+        "description": "Gestionar webhooks para clientes"
+    },
+    {
+        "code": "warehouse:read",
+        "module": "warehouse",
+        "action": "read",
+        "description": "Listar y detalle de almacenes"
+    },
+    {
+        "code": "warehouse:create",
+        "module": "warehouse",
+        "action": "create",
+        "description": "Crear nuevos almacenes"
+    },
+    {
+        "code": "warehouse:update",
+        "module": "warehouse",
+        "action": "update",
+        "description": "Actualizar información de los almacenes"
+    },
+    {
+        "code": "warehouse:delete",
+        "module": "warehouse",
+        "action": "delete",
+        "description": "Eliminar almacenes"
+    },
+    {
+        "code": "package:read",
+        "module": "package",
+        "action": "read",
+        "description": "Listar y detalle de paquetes"
+    },
+    {
+        "code": "package:create",
+        "module": "package",
+        "action": "create",
+        "description": "Crear nuevos paquetes"
+    },
+    {
+        "code": "package:update",
+        "module": "package",
+        "action": "update",
+        "description": "Actualizar información de los paquetes"
+    },
+    {
+        "code": "package:delete",
+        "module": "package",
+        "action": "delete",
+        "description": "Eliminar paquetes"
+    },
+    {
+        "code": "package:change-status",
+        "module": "package",
+        "action": "change-status",
+        "description": "Cambiar el estado de los paquetes"
+    }
+]

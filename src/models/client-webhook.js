@@ -1,6 +1,5 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '#config/sequelize';
-import { sign } from 'jsonwebtoken';
 
 const ClientWebhook = sequelize.define('ClientWebhook', {
     id: {

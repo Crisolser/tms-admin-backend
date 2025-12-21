@@ -39,12 +39,18 @@ const Role = sequelize.define('Role', {
     updatedAt: 'updated_at',
 });
 
-Role.associations = (models) => {
+Role.associate = (models) => {
     Role.belongsToMany(models.Admin, {
         through: models.AdminRole,
         foreignKey: 'role_id',
         otherKey: 'admin_id',
         as: 'admins',
+    });
+    Role.belongsToMany(models.Permission, {
+        through: models.RolePermission,
+        foreignKey: 'role_id',
+        otherKey: 'permission_id',
+        as: 'permissions',
     });
 }
 

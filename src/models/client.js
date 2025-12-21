@@ -40,7 +40,7 @@ const Client = sequelize.define('Client', {
     },
     updated_at: {
         type: DataTypes.DATE,
-        allowNull: false,
+        allowNull: true,
     },
     deleted_at: {
         type: DataTypes.DATE,

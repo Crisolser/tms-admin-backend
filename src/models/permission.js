@@ -31,7 +31,7 @@ const Permission = sequelize.define('Permission', {
     },
     updated_at: {
         type: DataTypes.DATE,
-        allowNull: false,
+        allowNull: true,
     },
 }, 
 {

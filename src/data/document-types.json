@@ -1,0 +1,34 @@
+[
+    {
+        "name": "INE FRONTAL",
+        "description": "Instituto Nacional Electoral - Frontal"
+    },
+    {
+        "name": "INE TRASERA",
+        "description": "Instituto Nacional Electoral - Trasera"
+    },
+    {
+        "name": "CURP",
+        "description": "Clave Única de Registro de Población"
+    },
+    {
+        "name": "COMPROBANTE DE DOMICILIO",
+        "description": "Documento que acredita el domicilio del usuario"
+    },
+    {
+        "name": "LICENCIA DE CONDUCIR",
+        "description": "Licencia oficial para conducir vehículos"
+    },
+    {
+        "name": "CFDI",
+        "description": "Comprobante Fiscal Digital por Internet"
+    },
+    {
+        "name": "ESTADO DE CUENTA BANCARIO",
+        "description": "Documento que muestra el estado de cuenta bancario del usuario"
+    },
+    {
+        "name": "TARJETA DE CIRCULACIÓN",
+        "description": "Documento que acredita la circulación del vehículo"
+    }
+]
