@@ -1,6 +1,5 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '#config/sequelize';
-import Client from './client';
 
 const ClientWarehouse = sequelize.define('ClientWarehouse', {
     id: {
