@@ -66,6 +66,10 @@ Client.associate = (models) => {
         foreignKey: 'client_id',
         as: 'api_tokens',
     });
+    Client.hasMany(models.Package, {
+        foreignKey: 'client_id',
+        as: 'packages',
+    });
 }
 
 export default Client;

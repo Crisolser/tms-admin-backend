@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '#config/sequelize';
+import Client from './client';
 
 const ClientWarehouse = sequelize.define('ClientWarehouse', {
     id: {
@@ -80,6 +81,10 @@ ClientWarehouse.associate = (models) => {
     ClientWarehouse.belongsTo(models.Client, {
         foreignKey: 'client_id',
         as: 'client',
+    });
+    ClientWarehouse.hasMany(models.Package, {
+        foreignKey: 'client_warehouse_id',
+        as: 'packages',
     });
 }
 

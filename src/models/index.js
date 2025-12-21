@@ -10,6 +10,10 @@ import Courier from './courier.js';
 import Vehicle from './vehicle.js';
 import CourierDocument from './courier_document.js';
 import DocumentType from './document-type.js';
+import Package from './package.js';
+import PackageStatus from './package-status.js';
+import PackageStatusHistory from './package-status-history.js';
+import Item from './item.js';
 
 const models = {
     Admin,
@@ -24,6 +28,10 @@ const models = {
     Vehicle,
     CourierDocument,
     DocumentType,
+    Package,
+    PackageStatus,
+    PackageStatusHistory,
+    Item,
 };
 
 Object.values(models).forEach(model => {

@@ -78,6 +78,10 @@ Courier.associate = (models) => {
         foreignKey: 'courier_id',
         as: 'documents',
     });
+    Courier.hasMany(models.Package, {
+        foreignKey: 'courier_id',
+        as: 'packages',
+    });
 }
 
 export default Courier;
