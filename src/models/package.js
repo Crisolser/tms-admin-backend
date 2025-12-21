@@ -44,7 +44,7 @@ const Package = sequelize.define('Package', {
         type: DataTypes.STRING(12),
         allowNull: true,
     },
-    referenes: {
+    references: {
         type: DataTypes.STRING(255),
         allowNull: true,
     },
@@ -78,7 +78,7 @@ const Package = sequelize.define('Package', {
         type: DataTypes.DATE,
         allowNull: true,
     },
-    cancelet_at: {
+    cancelled_at: {
         type: DataTypes.DATE,
         allowNull: true,
     },

@@ -1,1 +1,1 @@
-export * from './account-status'
+export * from './account-status';

@@ -39,7 +39,7 @@ const DocumentType = sequelize.define('DocumentType', {
     updatedAt: 'updated_at',
 });
 
-DocumentType.associations = (models) => {
+DocumentType.associate = (models) => {
     DocumentType.hasMany(models.CourierDocument, {
         foreignKey: 'document_type_id',
         as: 'courier_documents',

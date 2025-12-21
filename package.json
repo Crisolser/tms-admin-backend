@@ -27,7 +27,11 @@
     "#app": "./src/app.js",
     "#repository/*": "./src/repository/*.js",
     "#constants": "./src/constants/index.js",
-    "#enums": "./src/enums/index.js"
+    "#enums": "./src/enums/index.js",
+    "#seeders": "./src/seeders/index.js",
+    "#data/*": "./src/data/*.json",
+    "#catalogs-data": "./src/seeders/catalogs/index.js",
+    "#dummy-data": "./src/seeders/dummy/index.js"
   },
   "dependencies": {
     "@scalar/express-api-reference": "^0.8.30",

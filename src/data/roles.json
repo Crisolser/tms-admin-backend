@@ -1,0 +1,14 @@
+[
+    {
+        "name": "Admin",
+        "description": "Rol con todos los permisos"
+    },
+    {
+        "name": "Operator",
+        "description": "Rol con permisos limitados para operaciones específicas"
+    },
+    {
+        "name": "Sales",
+        "description": "Rol con permisos para gestionar ventas y clientes"
+    }
+]

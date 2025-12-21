@@ -23,7 +23,7 @@ const PackageStatus = sequelize.define('PackageStatus', {
     underscored: true,
 });
 
-PackageStatus.associations = (models) => {
+PackageStatus.associate = (models) => {
     PackageStatus.hasMany(models.Package, {
         foreignKey: 'package_status_id',
         as: 'packages',

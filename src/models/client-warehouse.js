@@ -23,7 +23,7 @@ const ClientWarehouse = sequelize.define('ClientWarehouse', {
         type: DataTypes.STRING(100),
         allowNull: false,
     },
-    phone: {
+    contact_phone: {
         type: DataTypes.STRING(12),
         allowNull: true,
     },

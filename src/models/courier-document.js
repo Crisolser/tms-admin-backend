@@ -1,6 +1,5 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '#config/sequelize';
-import { file } from 'zod';
 
 const CourierDocument = sequelize.define('CourierDocument', {
     id: {
