@@ -3,6 +3,9 @@ import AdminRole from './admin-role.js';
 import Role from './role.js';
 import RolePermission from './role-permission.js';
 import Permission from './permission.js';
+import Client from './client.js';
+import ClientWarehouse from './client_warehouse.js';
+import ClientApiToken from './client_api_token.js';
 
 const models = {
     Admin,
@@ -10,6 +13,9 @@ const models = {
     Role,
     RolePermission,
     Permission,
+    Client,
+    ClientWarehouse,
+    ClientApiToken,
 };
 
 Object.values(models).forEach(model => {

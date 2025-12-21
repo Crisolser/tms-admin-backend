@@ -38,6 +38,8 @@ const Permission = sequelize.define('Permission', {
     tableName: 'permission',
     timestamps: false,
     underscored: true,
+    createdAt: 'created_at',
+    updatedAt: 'updated_at',
 });
 
 Permission.associate = (models) => {
