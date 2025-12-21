@@ -6,6 +6,10 @@ import Permission from './permission.js';
 import Client from './client.js';
 import ClientWarehouse from './client_warehouse.js';
 import ClientApiToken from './client_api_token.js';
+import Courier from './courier.js';
+import Vehicle from './vehicle.js';
+import CourierDocument from './courier_document.js';
+import DocumentType from './document-type.js';
 
 const models = {
     Admin,
@@ -16,6 +20,10 @@ const models = {
     Client,
     ClientWarehouse,
     ClientApiToken,
+    Courier,
+    Vehicle,
+    CourierDocument,
+    DocumentType,
 };
 
 Object.values(models).forEach(model => {
