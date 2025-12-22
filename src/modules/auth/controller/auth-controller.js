@@ -13,3 +13,15 @@ export const getSession = async (req, res, next) => {
         return next(err);
     }
 };
+
+export const refreshSession = async (req, res, next) => {
+    try {
+        const headers = req.headers;
+        const token = await AuthService.updateToken(headers);
+        const message = APP_MESSAGES.AUTH.REFRESH_SUCCESS;
+        const additionalData = { ...token };
+        return successHandler(req, res, { message, additionalData });
+    } catch (err) {
+        return next(err);
+    }
+};

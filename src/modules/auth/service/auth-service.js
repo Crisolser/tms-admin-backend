@@ -45,6 +45,36 @@ const createToken = async credentials => {
   };
 };
 
+const updateToken = async headers => {
+  const refreshToken = headers['x-refresh-token'];
+  const { AUTH_ACCESS_TOKEN_EXPIRATION } = env;
+
+  if (!refreshToken) throw error(APP_MESSAGES.AUTH.NOT_REFRESH_TOKEN, '', HTTP_STATUS.UNAUTHORIZED);
+  const decoded = validateJWT(refreshToken);
+
+  let { admin } = decoded;
+  if (!admin) throw error(APP_MESSAGES.AUTH.INVALID_REFRESH_TOKEN, '', HTTP_STATUS.UNAUTHORIZED);
+
+  const user = await UserRepository.findOneByEmail(admin.email);
+  if (!user) throw error(APP_MESSAGES.USER.NOT_FOUND, '', HTTP_STATUS.NOT_FOUND);
+  if (user.status == 4) throw error(APP_MESSAGES.USER.DISABLED, '', HTTP_STATUS.FORBIDDEN);
+
+  const permissions = await UserRepository.getPermissions(user.id);
+
+  const newToken = createJWT(
+    {
+      admin,
+      permissions,
+    },
+    AUTH_ACCESS_TOKEN_EXPIRATION
+  );
+
+  return {
+    token: newToken,
+  };
+};
+
 export default {
   createToken,
+  updateToken
 };
