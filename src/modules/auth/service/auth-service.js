@@ -58,7 +58,7 @@ const updateToken = async headers => {
 
   const user = await UserRepository.findOneByEmail(admin.email);
   if (!user) throw error(APP_MESSAGES.ADMIN.NOT_FOUND, '', HTTP_STATUS.NOT_FOUND);
-  if (user.status == 4) throw error(APP_MESSAGES.ADMIN.DISABLED, '', HTTP_STATUS.FORBIDDEN);
+  if (INACTIVE_STATUSES.includes(user.status)) throw error(APP_MESSAGES.ADMIN.DISABLED, '', HTTP_STATUS.FORBIDDEN);
 
   const permissions = await UserRepository.getPermissions(user.id);
 
