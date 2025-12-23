@@ -5,17 +5,18 @@ const { Admin } = models;
 
 const findOneById = async id => {
     return await Admin.findByPk(id);
-}
+};
 
 const findOneByEmail = async email => {
     return await Admin.findOne({ where: { email } });
-}
+};
 
 const getRoles = async id => {
     const admin = await Admin.findByPk(id);
+    if (!admin) return [];
     const roles = await admin.getRoles();
     return roles;
-}
+};
 
 const getPermissions = async id => {
     const query = `
@@ -42,7 +43,7 @@ const getPermissions = async id => {
     const uniquePermissions = [...new Set(permissions.map(p => p.code))];
 
     return uniquePermissions;
-}
+};
 
 export default {
     findOneById,
