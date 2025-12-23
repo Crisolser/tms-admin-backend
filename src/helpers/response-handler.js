@@ -16,5 +16,4 @@ export const successHandler = (req, res, { message, additionalData, statusCode }
     })
   );
   res.status(statusCode).json(response);
-  return;
 };

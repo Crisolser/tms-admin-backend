@@ -33,10 +33,10 @@ const getPermissions = async id => {
         left join 
         "permission" p on rp.permission_id = p.id
     WHERE 
-        a.id=1
+        a.id=:id
     `;
     const permissions = await sequelize.query(query, {
-        replacements: { adminId: id },
+        replacements: { id },
         type: sequelize.QueryTypes.SELECT,
     });
     const uniquePermissions = [...new Set(permissions.map(p => p.code))];

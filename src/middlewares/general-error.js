@@ -15,5 +15,4 @@ export const errorHandler = (err, req, res, _next) => {
     message: err.message || APP_MESSAGES.ERROR.SERVER,
     ...err.additionalData,
   });
-  return;
 };

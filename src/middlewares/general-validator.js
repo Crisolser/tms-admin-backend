@@ -12,17 +12,17 @@ export const validateRequest = (schema, scope) => (req, res, next) => {
       const fullPath = issue.path.map(segment => (typeof segment === 'string' ? segment : `[${segment}]`)).join('.');
       const { message, code } = issue;
 
-      const issueFormated = {
+      const issueFormatted = {
         message,
         parameter: fullPath.length > 0 ? fullPath : undefined,
       };
 
       if (code === 'unrecognized_keys') {
-        issueFormated.message = APP_MESSAGES.ERROR.INVALID_PARAMS;
-        issueFormated.invalid_params = issue.keys;
+        issueFormatted.message = APP_MESSAGES.ERROR.INVALID_PARAMS;
+        issueFormatted.invalid_params = issue.keys;
       }
 
-      return issueFormated;
+      return issueFormatted;
     });
     const validationError = error(APP_MESSAGES.ERROR.BAD_REQUEST, { issues: issuesFormatted });
     next(validationError);
