@@ -9,9 +9,8 @@ const app = express();
 app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
 app.use(syntaxError);
+app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
   res.send('Bienvenido al API de TMS Admin');
@@ -20,6 +19,5 @@ app.get('/', (req, res) => {
 app.use('/api', allRoutes);
 
 app.use(errorHandler);
-
 
 export default app;

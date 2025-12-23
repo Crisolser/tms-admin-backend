@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import env from '#config/env';
 import { error } from '#helpers';
 import { validateJWT, createJWT } from '#authmodule/core/index';
-import UserRepository from '#repository/admin';
+import AdminRepository from '#repository/admin';
 import { APP_MESSAGES, HTTP_STATUS } from '#constants';
 import { INACTIVE_STATUSES } from '#enums';
 
@@ -10,14 +10,14 @@ const createToken = async credentials => {
   const { email, password } = credentials;
   const { AUTH_ACCESS_TOKEN_EXPIRATION, AUTH_REFRESH_TOKEN_EXPIRATION } = env;
 
-  const user = await UserRepository.findOneByEmail(email);
-  if (!user) throw error(APP_MESSAGES.AUTH.INVALID_CREDENTIALS, '', HTTP_STATUS.UNAUTHORIZED);
-  if (INACTIVE_STATUSES.includes(user.status)) throw error(APP_MESSAGES.ADMIN.DISABLED, '', HTTP_STATUS.FORBIDDEN);
+  const user = await AdminRepository.findOneByEmail(email);
+  if (!user) throw error(APP_MESSAGES.AUTH.INVALID_CREDENTIALS, {}, HTTP_STATUS.UNAUTHORIZED);
+  if (INACTIVE_STATUSES.includes(user.status)) throw error(APP_MESSAGES.ADMIN.DISABLED, {}, HTTP_STATUS.FORBIDDEN);
 
   const isPasswordValid = await bcrypt.compare(password, user.password);
-  if (!isPasswordValid) throw error(APP_MESSAGES.AUTH.INVALID_CREDENTIALS, '', HTTP_STATUS.UNAUTHORIZED);
+  if (!isPasswordValid) throw error(APP_MESSAGES.AUTH.INVALID_CREDENTIALS, {}, HTTP_STATUS.UNAUTHORIZED);
 
-  const permissions = await UserRepository.getPermissions(user.id);
+  const permissions = await AdminRepository.getPermissions(user.id);
 
   const admin = {
     id: user.id,
@@ -50,17 +50,17 @@ const updateToken = async headers => {
   const refreshToken = headers['x-refresh-token'];
   const { AUTH_ACCESS_TOKEN_EXPIRATION } = env;
 
-  if (!refreshToken) throw error(APP_MESSAGES.AUTH.NOT_REFRESH_TOKEN, '', HTTP_STATUS.UNAUTHORIZED);
+  if (!refreshToken) throw error(APP_MESSAGES.AUTH.NOT_REFRESH_TOKEN, {}, HTTP_STATUS.UNAUTHORIZED);
   const decoded = validateJWT(refreshToken);
 
-  let { admin } = decoded;
-  if (!admin) throw error(APP_MESSAGES.AUTH.INVALID_REFRESH_TOKEN, '', HTTP_STATUS.UNAUTHORIZED);
+  const { admin } = decoded;
+  if (!admin) throw error(APP_MESSAGES.AUTH.INVALID_REFRESH_TOKEN, {}, HTTP_STATUS.UNAUTHORIZED);
 
-  const user = await UserRepository.findOneByEmail(admin.email);
-  if (!user) throw error(APP_MESSAGES.ADMIN.NOT_FOUND, '', HTTP_STATUS.NOT_FOUND);
-  if (INACTIVE_STATUSES.includes(user.status)) throw error(APP_MESSAGES.ADMIN.DISABLED, '', HTTP_STATUS.FORBIDDEN);
+  const user = await AdminRepository.findOneByEmail(admin.email);
+  if (!user) throw error(APP_MESSAGES.ADMIN.NOT_FOUND, {}, HTTP_STATUS.NOT_FOUND);
+  if (INACTIVE_STATUSES.includes(user.status)) throw error(APP_MESSAGES.ADMIN.DISABLED, {}, HTTP_STATUS.FORBIDDEN);
 
-  const permissions = await UserRepository.getPermissions(user.id);
+  const permissions = await AdminRepository.getPermissions(user.id);
 
   const newToken = createJWT(
     {
