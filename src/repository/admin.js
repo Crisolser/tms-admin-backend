@@ -1,15 +1,50 @@
 import sequelize from '#config/sequelize';
+import { Op } from 'sequelize';
 import models from '#models';
 
 const { Admin } = models;
 
+const findMany = async (filters) => {
+    const { page, limit, id, email, phone, status } = filters;
+    const offset = (page - 1) * limit;
+    const where = {};
+    
+    if (id !== undefined) where.id = id;
+    if (email !== undefined) where.email = { [Op.iLike]: `%${email}%` };
+    if (phone !== undefined) where.phone = { [Op.iLike]: `%${phone}%` };
+    if (status !== undefined) where.status = status;
+
+    const { rows, count } = await Admin.findAndCountAll({
+        where,
+        attributes: { exclude: ['password', 'deleted_at', 'created_at', 'updated_at', 'profile_photo', 'maternal_surname'] },
+        limit,
+        offset,
+        order: [['id', 'ASC']],
+    });
+
+    return {
+        admins: rows,
+        total: count,
+    };
+}
+
 const findOneById = async id => {
-    return await Admin.findByPk(id);
+    return await Admin.findByPk(id, {
+        attributes: { exclude: ['password', 'deleted_at'] },
+    });
 };
 
 const findOneByEmail = async email => {
-    return await Admin.findOne({ where: { email } });
+    return await Admin.findOne({ 
+        where: { email },
+        attributes: { exclude: ['deleted_at'] }, 
+    });
 };
+
+const create = async data => {
+    const { id } = await Admin.create(data);
+    return id;
+}
 
 const getRoles = async id => {
     const admin = await Admin.findByPk(id);
@@ -46,8 +81,10 @@ const getPermissions = async id => {
 };
 
 export default {
+    findMany,
     findOneById,
     findOneByEmail,
+    create,
     getRoles,
     getPermissions,
 };
