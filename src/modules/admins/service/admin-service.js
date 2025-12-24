@@ -1,7 +1,8 @@
 import bcrypt from 'bcrypt';
-import { error } from '#helpers';
+import { error, comparateChanges } from '#helpers';
 import AdminRepository from '#repository/admin';
 import { APP_MESSAGES, HTTP_STATUS } from '#constants';
+import { existEmailInAdmin } from '#adminsmodule/core/index';
 
 const getAll = async filters => {
     const { page, limit, ...filterParameters } = filters;
@@ -38,8 +39,24 @@ const getById = async id => {
     return admin;
 }
 
+const update = async (id, changes) => {
+    const admin = await AdminRepository.findOneById(id);
+    if (!admin) throw error(APP_MESSAGES.ADMIN.NOT_FOUND(id), {}, HTTP_STATUS.NOT_FOUND);
+    const { newData, oldData } = comparateChanges(changes, admin);
+    const updatedFields = Object.keys(newData);
+    if (updatedFields.includes('email')) existEmailInAdmin(newData.email);
+
+    await AdminRepository.update(id, newData);
+    return {
+        updated_fields: updatedFields,
+        new_data: newData,
+        old_data: oldData
+    };
+}
+
 export default {
     getAll,
     create,
     getById,
+    update,
 };

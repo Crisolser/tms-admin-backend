@@ -1,6 +1,11 @@
 import { Router } from 'express';
 import { validateRequest, validatePermission } from '#middlewares';
-import { ListAdminsSchema, CreateAdminSchema, GetAdminSchema } from '#adminsmodule/schemas/index';
+import { 
+    ListAdminsSchema, 
+    CreateAdminSchema, 
+    GetAdminSchema,
+    UpdateAdminSchema 
+} from '#adminsmodule/schemas/index';
 import {
     getAdmins,
     createAdmin,
@@ -34,7 +39,9 @@ router.get(
 );
 router.put(
     '/:id', 
-    validatePermission('admin:update'), 
+    validatePermission('admin:update'),
+    validateRequest(GetAdminSchema, 'params'),
+    validateRequest(UpdateAdminSchema, 'body'), 
     updateAdmin
 );
 router.delete(

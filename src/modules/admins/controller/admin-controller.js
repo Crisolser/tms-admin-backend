@@ -41,12 +41,11 @@ export const getAdminById = async (req, res, next) => {
 
 export const updateAdmin = async (req, res, next) => {
     try {
-        const { id } = req.params;
-        const adminData = req.body;
-        // Logic to update admin
-        const updatedAdmin = {};
+        const { id } = req.validated.params;
+        const changes = req.validated.body;
+        const updatedAdmin = await AdminService.update(id, changes);
         const message = APP_MESSAGES.ADMIN.UPDATED(id);
-        const additionalData = { admin: adminData };
+        const additionalData = { ...updatedAdmin };
         return successHandler(req, res, { message, additionalData });
     }
     catch (err) {

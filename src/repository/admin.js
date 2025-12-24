@@ -46,6 +46,11 @@ const create = async data => {
     return id;
 }
 
+const update = async (id, data) => {
+    await Admin.update(data, { where: { id } });
+    return;
+}
+
 const getRoles = async id => {
     const admin = await Admin.findByPk(id);
     if (!admin) return [];
@@ -85,6 +90,7 @@ export default {
     findOneById,
     findOneByEmail,
     create,
+    update,
     getRoles,
     getPermissions,
 };
