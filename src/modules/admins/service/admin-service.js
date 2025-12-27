@@ -54,9 +54,24 @@ const update = async (id, changes) => {
     };
 }
 
+const remove = async id => {
+    const admin = await AdminRepository.findOneById(id);
+    if (!admin) throw error(APP_MESSAGES.ADMIN.NOT_FOUND(id), {}, HTTP_STATUS.NOT_FOUND);
+    await AdminRepository.softRemove(id);
+}
+
+const changePassword = async (id, newPassword) => {
+    const admin = await AdminRepository.findOneById(id);
+    if (!admin) throw error(APP_MESSAGES.ADMIN.NOT_FOUND(id), {}, HTTP_STATUS.NOT_FOUND);
+    const password = await bcrypt.hash(newPassword, 10);
+    await AdminRepository.update(id, { password });
+}
+
 export default {
     getAll,
     create,
     getById,
     update,
+    remove,
+    changePassword
 };

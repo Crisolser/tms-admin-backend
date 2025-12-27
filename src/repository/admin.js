@@ -51,6 +51,12 @@ const update = async (id, data) => {
     return;
 }
 
+const softRemove = async id => {
+    const admin = await Admin.findByPk(id);
+    await admin.destroy();
+    return;
+}
+
 const getRoles = async id => {
     const admin = await Admin.findByPk(id);
     if (!admin) return [];
@@ -91,6 +97,7 @@ export default {
     findOneByEmail,
     create,
     update,
+    softRemove,
     getRoles,
     getPermissions,
 };

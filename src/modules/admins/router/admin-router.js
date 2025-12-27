@@ -4,7 +4,8 @@ import {
     ListAdminsSchema, 
     CreateAdminSchema, 
     GetAdminSchema,
-    UpdateAdminSchema 
+    UpdateAdminSchema,
+    ChangePasswordSchema
 } from '#adminsmodule/schemas/index';
 import {
     getAdmins,
@@ -47,11 +48,14 @@ router.put(
 router.delete(
     '/:id', 
     validatePermission('admin:delete'), 
+    validateRequest(GetAdminSchema, 'params'),
     deleteAdmin
 );
 router.put(
     '/:id/password', 
     validatePermission('admin:change-password'), 
+    validateRequest(GetAdminSchema, 'params'),
+    validateRequest(ChangePasswordSchema, 'body'),
     changeAdminPassword
 );
 router.get(

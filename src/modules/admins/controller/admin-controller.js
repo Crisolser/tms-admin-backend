@@ -55,8 +55,8 @@ export const updateAdmin = async (req, res, next) => {
 
 export const deleteAdmin = async (req, res, next) => {
     try {
-        const { id } = req.params;
-        // Logic to delete admin
+        const { id } = req.validated.params;
+        await AdminService.remove(id);
         const message = APP_MESSAGES.ADMIN.DELETED(id);
         return successHandler(req, res, { message });
     }
@@ -67,9 +67,9 @@ export const deleteAdmin = async (req, res, next) => {
 
 export const changeAdminPassword = async (req, res, next) => { 
     try {
-        const { id } = req.params;
-        const { newPassword } = req.body;
-        // Logic to change admin password
+        const { id } = req.validated.params;
+        const { password } = req.validated.body;
+        await AdminService.changePassword(id, password);
         const message = APP_MESSAGES.ADMIN.PASSWORD_CHANGED(id);
         return successHandler(req, res, { message });
     }
