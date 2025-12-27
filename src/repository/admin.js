@@ -60,9 +60,25 @@ const softRemove = async id => {
 const getRoles = async id => {
     const admin = await Admin.findByPk(id);
     if (!admin) return [];
-    const roles = await admin.getRoles();
+    const roles = await admin.getRoles({
+        attributes: ['id', 'name', 'description'],
+        where: { is_active: true },
+        joinTableAttributes: []
+    });
     return roles;
 };
+
+const addRoles = async (id, roles) => {
+    const admin = await Admin.findByPk(id);
+    await admin.addRoles(roles);
+    return;
+};
+
+const removeRoles = async (id, roles) => {
+    const admin = await Admin.findByPk(id);
+    await admin.removeRoles(roles);
+    return;
+}
 
 const getPermissions = async id => {
     const query = `
@@ -99,5 +115,7 @@ export default {
     update,
     softRemove,
     getRoles,
+    addRoles,
+    removeRoles,
     getPermissions,
 };

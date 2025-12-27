@@ -1,6 +1,12 @@
 import bcrypt from 'bcrypt';
-import { error, comparateChanges } from '#helpers';
+import { 
+    error, 
+    comparateChanges, 
+    comparateAsossiations,
+    findInvalidAssociations 
+} from '#helpers';
 import AdminRepository from '#repository/admin';
+import RoleRepository from '#repository/role';
 import { APP_MESSAGES, HTTP_STATUS } from '#constants';
 import { existEmailInAdmin } from '#adminsmodule/core/index';
 
@@ -67,11 +73,47 @@ const changePassword = async (id, newPassword) => {
     await AdminRepository.update(id, { password });
 }
 
+const getRoles = async id => {
+    const admin = await AdminRepository.findOneById(id);
+    if (!admin) throw error(APP_MESSAGES.ADMIN.NOT_FOUND(id), {}, HTTP_STATUS.NOT_FOUND);
+    let roles = await RoleRepository.findAll()
+    let adminRoles =  await AdminRepository.getRoles(id);
+    let adminRolesIds = adminRoles.map(role => role.id);
+    roles = roles.map(role => {
+        const roleJson = role.toJSON();
+        const {created_at, updated_at,is_active, ...roleData} = roleJson;
+        return {
+            ...roleData,
+            is_active_in_admin: adminRolesIds.includes(role.id)
+        }
+    });
+    return roles;
+}
+
+const updateRoles = async (id, roles) => {
+    const admin = await AdminRepository.findOneById(id);
+    if (!admin) throw error(APP_MESSAGES.ADMIN.NOT_FOUND(id), {}, HTTP_STATUS.NOT_FOUND);
+    const allRoles = await RoleRepository.findAll();
+    findInvalidAssociations(roles, allRoles);
+    const actualAdminRoles = await AdminRepository.getRoles(id);
+    const { createData, deleteData } = comparateAsossiations(roles, actualAdminRoles, 'is_active_in_admin');
+    await AdminRepository.addRoles(id, createData);
+    await AdminRepository.removeRoles(id, deleteData);
+
+    const rolesUpdated = {
+        added_roles: createData,
+        removed_roles: deleteData
+    };
+    return rolesUpdated;
+}
+
 export default {
     getAll,
     create,
     getById,
     update,
     remove,
-    changePassword
+    changePassword,
+    getRoles,
+    updateRoles
 };

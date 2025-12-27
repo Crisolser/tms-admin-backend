@@ -5,7 +5,8 @@ import {
     CreateAdminSchema, 
     GetAdminSchema,
     UpdateAdminSchema,
-    ChangePasswordSchema
+    ChangePasswordSchema,
+    UpdateAdminRolesSchema
 } from '#adminsmodule/schemas/index';
 import {
     getAdmins,
@@ -61,11 +62,14 @@ router.put(
 router.get(
     '/:id/roles', 
     validatePermission('admin:assign-roles'), 
+    validateRequest(GetAdminSchema, 'params'),
     getAdminRoles
 );
 router.put(
     '/:id/roles', 
-    validatePermission('admin:assign-roles'), 
+    validatePermission('admin:assign-roles'),
+    validateRequest(GetAdminSchema, 'params'),
+    validateRequest(UpdateAdminRolesSchema, 'body'),
     assignAdminRoles
 );
 

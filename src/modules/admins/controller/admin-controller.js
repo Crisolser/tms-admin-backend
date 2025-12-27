@@ -80,9 +80,8 @@ export const changeAdminPassword = async (req, res, next) => {
 
 export const getAdminRoles = async (req, res, next) => {
     try {
-        const { id } = req.params;
-        // Logic to get admin roles
-        const roles = [];
+        const { id } = req.validated.params;
+        const roles = await AdminService.getRoles(id);
         const message = APP_MESSAGES.ADMIN.GET_ROLES(id);
         return successHandler(req, res, { message, additionalData: { roles } });
     }
@@ -93,11 +92,12 @@ export const getAdminRoles = async (req, res, next) => {
 
 export const assignAdminRoles = async (req, res, next) => {
     try {
-        const { id } = req.params;
-        const { roles } = req.body;
-        // Logic to assign roles to admin
+        const { id } = req.validated.params;
+        const { roles } = req.validated.body;
+        const updatedRoles = await AdminService.updateRoles(id, roles);
         const message = APP_MESSAGES.ADMIN.UPDATE_ROLES(id);
-        return successHandler(req, res, { message });
+        const additionalData = { ...updatedRoles };
+        return successHandler(req, res, { message, additionalData });
     }
     catch (err) {
         return next(err);
