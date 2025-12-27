@@ -32,6 +32,10 @@ const Admin = sequelize.define('Admin', {
         type: DataTypes.STRING(255),
         allowNull: false,
     },
+    profile_photo: {
+        type: DataTypes.STRING(255),
+        allowNull: true,
+    },
     status: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -44,7 +48,7 @@ const Admin = sequelize.define('Admin', {
     },
     updated_at: {
         type: DataTypes.DATE,
-        allowNull: false
+        allowNull: true
     },
     deleted_at: {
         type: DataTypes.DATE,
