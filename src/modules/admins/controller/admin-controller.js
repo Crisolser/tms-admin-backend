@@ -5,7 +5,6 @@ import AdminService from '#adminsmodule/service/admin-service';
 export const getAdmins = async (req, res, next) => {
     try {
         const filters = req.validated.query;
-        console.log(filters);
         const admins = await AdminService.getAll(filters);
         const message = APP_MESSAGES.ADMIN.GET_LIST;
         const additionalData = { ...admins };

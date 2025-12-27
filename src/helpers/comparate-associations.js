@@ -23,7 +23,7 @@ import { APP_MESSAGES } from '#constants';
  *  { id: 3 },
  * ];
  *
- * const result = comparateAsossiations(newData, actualData, 'is_active_in_admin');
+ * const result = comparateAssociations(newData, actualData, 'is_active_in_admin');
  * // result será:
  * // {
  * //   createData: [2, 5],
@@ -31,14 +31,14 @@ import { APP_MESSAGES } from '#constants';
  * // }
  */
 
-export const comparateAsossiations = (newAssociations, actualAssociations, activeParameter) => {
+export const comparateAssociations = (newAssociations, actualAssociations, activeParameter) => {
   if (newAssociations.length === 0) throw error(APP_MESSAGES.ERROR.NOT_CHANGED);
   let activeNewAssociations = newAssociations.filter(item => item[activeParameter]);
   let desactiveNewAssociations = newAssociations.filter(item => !item[activeParameter]);
   let actualAssociationsIds = actualAssociations.map(item => item.id);
   let createData = activeNewAssociations.filter(item => !actualAssociationsIds.includes(item.id)).map(item => item.id);
   let deleteData = desactiveNewAssociations.filter(item => actualAssociationsIds.includes(item.id)).map(item => item.id);
-  if (createData.length == 0 && deleteData.length == 0) throw error(APP_MESSAGES.ERROR.NOT_CHANGED);
+  if (createData.length === 0 && deleteData.length === 0) throw error(APP_MESSAGES.ERROR.NOT_CHANGED);
   return { createData, deleteData };
 };
 

@@ -50,7 +50,7 @@ export const comparateChanges = (changes, actualData) => {
   }
 
   changeKeys = Object.keys(objectChanges);
-  if (changeKeys.length == 0) throw error(APP_MESSAGES.ERROR.NOT_CHANGED);
+  if (changeKeys.length === 0) throw error(APP_MESSAGES.ERROR.NOT_CHANGED);
 
   return { newData: objectChanges, oldData };
 };

@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { is } from 'zod/locales';
 
 export const UpdateAdminRolesSchema = z.object({
     roles: z
