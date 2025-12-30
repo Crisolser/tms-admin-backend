@@ -17,9 +17,8 @@ export const getClients = async (req, res, next) => {
 
 export const createClient = async (req, res, next) => {
     try {
-        const data = req.body;
-        // Implement ClientService.create similar to AdminService.create
-        const newClient = 1;
+        const data = req.validated.body;
+        const newClient = await ClientService.create(data);
         const message = APP_MESSAGES.CLIENT.CREATED;
         const additionalData = { client_id: newClient };
         return successHandler(req, res, { message, additionalData });

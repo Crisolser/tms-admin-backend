@@ -7,6 +7,7 @@ import {
 } from '#helpers';
 import ClientRepository from '#repository/client';
 import { APP_MESSAGES, HTTP_STATUS } from '#constants';
+import { existEmailInClient } from '#clientmodule/core/index';
 
 const getAll = async filters => {
     const { page, limit, ...filterParameters } = filters;
@@ -28,6 +29,15 @@ const getAll = async filters => {
     return clientsData;
 };
 
+const create = async data => {
+    const { email, password } = data;
+    await existEmailInClient(email);
+    data.password = await bcrypt.hash(password, 10);
+    const newClient = await ClientRepository.create(data);
+    return newClient;
+}
+
 export default {
     getAll,
+    create,
 };

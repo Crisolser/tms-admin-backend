@@ -26,6 +26,27 @@ const findMany = async (filters) => {
     };
 }
 
+const findOneById = async id => {
+    return await Client.findByPk(id, {
+        attributes: { exclude: ['password', 'deleted_at'] },
+    });
+};
+
+const findOneByEmail = async email => {
+    return await Client.findOne({ 
+        where: { email },
+        attributes: { exclude: ['deleted_at'] }, 
+    });
+};
+
+const create = async data => {
+    const { id } = await Client.create(data);
+    return id;
+}
+
 export default {
     findMany,
+    findOneById,
+    findOneByEmail,
+    create,
 };
