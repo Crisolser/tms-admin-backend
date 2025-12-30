@@ -1,7 +1,7 @@
 import { Op, fn, col, where as wh} from 'sequelize';
 import models from '#models';
 
-const { Client } = models;
+const { Client, ClientApiToken } = models;
 
 const findMany = async (filters) => {
     const { page, limit, id, email, phone, status, name } = filters;
@@ -55,11 +55,27 @@ const softRemove = async id => {
     return;
 }
 
+const createApiToken = async (id) => {
+    const token = await ClientApiToken.create(
+        { client_id: id }
+    );
+    return token;
+}
+
+const getApiTokens = async (id) => {
+    return await ClientApiToken.findAll({
+        where: { client_id: id },
+        attributes: { exclude: ['client_id'] },
+    });
+}
+
 export default {
     findMany,
     findOneById,
     findOneByEmail,
     create,
     update,
-    softRemove
+    softRemove,
+    createApiToken,
+    getApiTokens
 };

@@ -79,3 +79,35 @@ export const changeClientPassword = async (req, res, next) => {
         return next(err);
     }
 };
+
+export const createClientApiToken = async (req, res, next) => {
+    try {
+        const { id } = req.validated.params;
+        const token = await ClientService.createApiToken(id);
+        const message = APP_MESSAGES.CLIENT.API_TOKEN_CREATED(id);
+        const additionalData = { ...token };
+        return successHandler(req, res, { message, additionalData });
+    } catch (err) {
+        return next(err);
+    }
+};
+
+export const getClientApiTokens = async (req, res, next) => {
+    try {
+        const { id } = req.validated.params;
+        const tokens = await ClientService.getApiTokens(id);
+        const message = APP_MESSAGES.CLIENT.GET_API_TOKENS(id);
+        const additionalData = { tokens };
+        return successHandler(req, res, { message, additionalData });
+    } catch (err) {
+        return next(err);
+    }
+};
+
+export const deleteClientApiToken = async (req, res, next) => {
+    try {
+        // To be implemented
+    } catch (err) {
+        return next(err);
+    }
+};

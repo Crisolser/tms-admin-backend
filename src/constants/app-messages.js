@@ -42,5 +42,8 @@ export const APP_MESSAGES = {
         DELETED: id => `Cliente con ID ${id} eliminado correctamente`,
         NOT_FOUND: id => `Cliente con ID ${id} no encontrado`,
         PASSWORD_CHANGED: id => `Contraseña del cliente con ID ${id} cambiada correctamente`,
+        API_TOKEN_CREATED: id => `Token API para el cliente con ID ${id} creado correctamente`,
+        GET_API_TOKENS: id => `Tokens API para el cliente con ID ${id} obtenidos correctamente`,
+        REVOKE_API_TOKEN: (clientId, tokenId) => `Token API con ID ${tokenId} para el cliente con ID ${clientId} revocado correctamente`,
     },
 }

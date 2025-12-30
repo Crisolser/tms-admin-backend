@@ -6,6 +6,7 @@ import {
 import ClientRepository from '#repository/client';
 import { APP_MESSAGES, HTTP_STATUS } from '#constants';
 import { existEmailInClient } from '#clientmodule/core/index';
+import { apiTokenCreatedDto } from '#clientmodule/interface/index';
 
 const getAll = async filters => {
     const { page, limit, ...filterParameters } = filters;
@@ -70,11 +71,28 @@ const changePassword = async (id, newPassword) => {
     return;
 }
 
+const createApiToken = async (id) => {
+    const client = await ClientRepository.findOneById(id);
+    if (!client) throw error(APP_MESSAGES.CLIENT.NOT_FOUND(id), {}, HTTP_STATUS.NOT_FOUND);
+    const token = await ClientRepository.createApiToken(id);
+    const apiToken = apiTokenCreatedDto(token);
+    return apiToken;
+}
+
+const getApiTokens = async (id) => {
+    const client = await ClientRepository.findOneById(id);
+    if (!client) throw error(APP_MESSAGES.CLIENT.NOT_FOUND(id), {}, HTTP_STATUS.NOT_FOUND);
+    const tokens = await ClientRepository.getApiTokens(id);
+    return tokens;
+}
+
 export default {
     getAll,
     create,
     getById,
     update,
     softRemove,
-    changePassword
+    changePassword,
+    createApiToken,
+    getApiTokens
 };
