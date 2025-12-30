@@ -4,7 +4,8 @@ import {
     ListClientsSchema,
     CreateClientSchema,
     GetClientSchema,
-    UpdateClientSchema
+    UpdateClientSchema,
+    ChangePasswordSchema
 } from '#clientmodule/schemas/index';
 import {
     getClients,
@@ -51,6 +52,14 @@ router.delete(
     validatePermission('client:delete'),
     validateRequest(GetClientSchema, 'params'),
     deleteClient
+);
+
+router.put(
+    '/:id/password', 
+    validatePermission('client:change-password'),
+    validateRequest(GetClientSchema, 'params'),
+    validateRequest(ChangePasswordSchema, 'body'),
+    changeClientPassword
 );
 
 export default router;

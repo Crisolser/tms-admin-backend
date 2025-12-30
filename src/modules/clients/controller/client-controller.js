@@ -69,8 +69,9 @@ export const deleteClient = async (req, res, next) => {
 
 export const changeClientPassword = async (req, res, next) => { 
     try {
-        const { id } = req.params;
-        const { newPassword } = req.body;
+        const { id } = req.validated.params;
+        const { password } = req.validated.body;
+        await ClientService.changePassword(id, password);
         const message = APP_MESSAGES.CLIENT.PASSWORD_CHANGED(id);
         return successHandler(req, res, { message });
     }

@@ -62,10 +62,19 @@ const softRemove = async id => {
     return;
 }
 
+const changePassword = async (id, newPassword) => {
+    const client = await ClientRepository.findOneById(id);
+    if (!client) throw error(APP_MESSAGES.CLIENT.NOT_FOUND(id), {}, HTTP_STATUS.NOT_FOUND);
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    await ClientRepository.update(id, { password: hashedPassword });
+    return;
+}
+
 export default {
     getAll,
     create,
     getById,
     update,
-    softRemove
+    softRemove,
+    changePassword
 };
