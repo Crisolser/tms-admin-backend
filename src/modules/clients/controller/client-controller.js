@@ -57,7 +57,8 @@ export const updateClient = async (req, res, next) => {
 
 export const deleteClient = async (req, res, next) => {
     try {
-        const { id } = req.params;
+        const { id } = req.validated.params;
+        await ClientService.softRemove(id);
         const message = APP_MESSAGES.CLIENT.DELETED(id);
         return successHandler(req, res, { message });
     }

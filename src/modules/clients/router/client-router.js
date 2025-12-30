@@ -49,6 +49,7 @@ router.put(
 router.delete(
     '/:id', 
     validatePermission('client:delete'),
+    validateRequest(GetClientSchema, 'params'),
     deleteClient
 );
 

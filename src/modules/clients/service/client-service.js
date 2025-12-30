@@ -1,9 +1,7 @@
 import bcrypt from 'bcrypt';
 import { 
     error, 
-    comparateChanges, 
-    comparateAssociations,
-    findInvalidAssociations 
+    comparateChanges
 } from '#helpers';
 import ClientRepository from '#repository/client';
 import { APP_MESSAGES, HTTP_STATUS } from '#constants';
@@ -57,9 +55,17 @@ const update = async (id, changes) => {
     };
 }
 
+const softRemove = async id => {
+    const client = await ClientRepository.findOneById(id);
+    if (!client) throw error(APP_MESSAGES.CLIENT.NOT_FOUND(id), {}, HTTP_STATUS.NOT_FOUND);
+    await ClientRepository.softRemove(id);
+    return;
+}
+
 export default {
     getAll,
     create,
     getById,
     update,
+    softRemove
 };

@@ -49,10 +49,17 @@ const update = async (id, data) => {
     return;
 }
 
+const softRemove = async id => {
+    const client = await Client.findByPk(id);
+    await client.destroy();
+    return;
+}
+
 export default {
     findMany,
     findOneById,
     findOneByEmail,
     create,
     update,
+    softRemove
 };
