@@ -43,10 +43,9 @@ export const getClientById = async (req, res, next) => {
 
 export const updateClient = async (req, res, next) => {
     try {
-        const { id } = req.params;
-        const changes = req.body;
-        // Implement ClientService.update similar to AdminService.update
-        const updatedClient = {};
+        const { id } = req.validated.params;
+        const changes = req.validated.body;
+        const updatedClient = await ClientService.update(id, changes);
         const message = APP_MESSAGES.CLIENT.UPDATED(id);
         const additionalData = { ...updatedClient };
         return successHandler(req, res, { message, additionalData });

@@ -43,8 +43,23 @@ const getById = async id => {
     return client;
 }
 
+const update = async (id, changes) => {
+    const client = await ClientRepository.findOneById(id);
+    if (!client) throw error(APP_MESSAGES.CLIENT.NOT_FOUND(id), {}, HTTP_STATUS.NOT_FOUND);
+    const { newData, oldData } = comparateChanges(changes, client);
+    const updatedFields = Object.keys(newData);
+    if (updatedFields.includes('email')) await existEmailInClient(newData.email); 
+    await ClientRepository.update(id, newData);
+    return {
+        updated_fields: updatedFields,
+        new_data: newData,
+        old_data: oldData
+    };
+}
+
 export default {
     getAll,
     create,
     getById,
+    update,
 };

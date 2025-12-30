@@ -44,9 +44,15 @@ const create = async data => {
     return id;
 }
 
+const update = async (id, data) => {
+    await Client.update(data, { where: { id } });
+    return;
+}
+
 export default {
     findMany,
     findOneById,
     findOneByEmail,
     create,
+    update,
 };

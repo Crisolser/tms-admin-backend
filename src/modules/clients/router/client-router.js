@@ -3,7 +3,8 @@ import { validateRequest, validatePermission } from '#middlewares';
 import {
     ListClientsSchema,
     CreateClientSchema,
-    GetClientSchema
+    GetClientSchema,
+    UpdateClientSchema
 } from '#clientmodule/schemas/index';
 import {
     getClients,
@@ -40,6 +41,8 @@ router.get(
 router.put(
     '/:id', 
     validatePermission('client:update'),
+    validateRequest(GetClientSchema, 'params'),
+    validateRequest(UpdateClientSchema, 'body'),
     updateClient
 );
 
