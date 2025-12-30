@@ -87,7 +87,8 @@ export const createClientApiToken = async (req, res, next) => {
         const message = APP_MESSAGES.CLIENT.API_TOKEN_CREATED(id);
         const additionalData = { ...token };
         return successHandler(req, res, { message, additionalData });
-    } catch (err) {
+    } 
+    catch (err) {
         return next(err);
     }
 };
@@ -99,7 +100,23 @@ export const getClientApiTokens = async (req, res, next) => {
         const message = APP_MESSAGES.CLIENT.GET_API_TOKENS(id);
         const additionalData = { tokens };
         return successHandler(req, res, { message, additionalData });
-    } catch (err) {
+    } 
+    catch (err) {
+        return next(err);
+    }
+};
+
+export const updateClientApiToken = async (req, res, next) => {
+    try {
+        const params = req.validated.params;
+        const { id, tokenId } = params;
+        const changes = req.validated.body;
+        const updatedToken = await ClientService.updateApiToken(params, changes);
+        const message = APP_MESSAGES.CLIENT.UPDATED_API_TOKEN(id, tokenId);
+        const additionalData = { ...updatedToken };
+        return successHandler(req, res, { message, additionalData });
+    } 
+    catch (err) {
         return next(err);
     }
 };
@@ -107,7 +124,8 @@ export const getClientApiTokens = async (req, res, next) => {
 export const deleteClientApiToken = async (req, res, next) => {
     try {
         // To be implemented
-    } catch (err) {
+    } 
+    catch (err) {
         return next(err);
     }
 };

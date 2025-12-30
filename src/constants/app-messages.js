@@ -44,6 +44,8 @@ export const APP_MESSAGES = {
         PASSWORD_CHANGED: id => `Contraseña del cliente con ID ${id} cambiada correctamente`,
         API_TOKEN_CREATED: id => `Token API para el cliente con ID ${id} creado correctamente`,
         GET_API_TOKENS: id => `Tokens API para el cliente con ID ${id} obtenidos correctamente`,
-        REVOKE_API_TOKEN: (clientId, tokenId) => `Token API con ID ${tokenId} para el cliente con ID ${clientId} revocado correctamente`,
+        UPDATED_API_TOKEN: (clientId, tokenId) => `Token API con ID ${tokenId} para el cliente con ID ${clientId} actualizado correctamente`,
+        REVOKED_API_TOKEN: (clientId, tokenId) => `Token API con ID ${tokenId} para el cliente con ID ${clientId} revocado correctamente`,
+        API_TOKEN_NOT_BELONGS_TO_CLIENT: (tokenId, clientId) => `El token API con ID ${tokenId} no pertenece al cliente con ID ${clientId}`,
     },
 }

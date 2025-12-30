@@ -69,6 +69,15 @@ const getApiTokens = async (id) => {
     });
 }
 
+const findApiTokenById = async (tokenId) => {
+    return await ClientApiToken.findByPk(tokenId);
+}
+
+const updateApiToken = async (tokenId, changes) => {
+    await ClientApiToken.update(changes, { where: { id: tokenId } });
+    return;
+}
+
 export default {
     findMany,
     findOneById,
@@ -77,5 +86,7 @@ export default {
     update,
     softRemove,
     createApiToken,
-    getApiTokens
+    getApiTokens,
+    findApiTokenById,
+    updateApiToken
 };

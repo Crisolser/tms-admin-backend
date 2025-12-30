@@ -86,6 +86,24 @@ const getApiTokens = async (id) => {
     return tokens;
 }
 
+const updateApiToken = async (params, changes) => {
+    const { id, tokenId } = params;
+    const client = await ClientRepository.findOneById(id);
+    if (!client) throw error(APP_MESSAGES.CLIENT.NOT_FOUND(id), {}, HTTP_STATUS.NOT_FOUND);
+    const token = await ClientRepository.findApiTokenById(tokenId);
+    if (!token) throw error(APP_MESSAGES.CLIENT.NOT_FOUND(tokenId), {}, HTTP_STATUS.NOT_FOUND);
+    if (token.client_id !== id) throw error(APP_MESSAGES.CLIENT.API_TOKEN_NOT_BELONGS_TO_CLIENT(tokenId, id));
+    
+    const { newData, oldData } = comparateChanges(changes, token);
+    const updatedFields = Object.keys(newData);
+    await ClientRepository.updateApiToken(tokenId, newData);
+    return {
+        updated_fields: updatedFields,
+        new_data: newData,
+        old_data: oldData
+    };
+}
+
 export default {
     getAll,
     create,
@@ -94,5 +112,6 @@ export default {
     softRemove,
     changePassword,
     createApiToken,
-    getApiTokens
+    getApiTokens,
+    updateApiToken
 };

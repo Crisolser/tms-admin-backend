@@ -5,7 +5,9 @@ import {
     CreateClientSchema,
     GetClientSchema,
     UpdateClientSchema,
-    ChangePasswordSchema
+    ChangePasswordSchema,
+    GetClientApiTokenSchema,
+    UpdateClientApiTokenSchema
 } from '#clientmodule/schemas/index';
 import {
     getClients,
@@ -15,7 +17,8 @@ import {
     deleteClient,
     changeClientPassword,
     createClientApiToken,
-    getClientApiTokens
+    getClientApiTokens,
+    updateClientApiToken
 } from '#clientmodule/controller/client-controller';
 
 const router = Router();
@@ -76,6 +79,14 @@ router.get(
     validatePermission('client:manage-api-token'),
     validateRequest(GetClientSchema, 'params'),
     getClientApiTokens
+);
+
+router.put(
+    '/:id/api-tokens/:tokenId',
+    validatePermission('client:manage-api-token'),
+    validateRequest(GetClientApiTokenSchema, 'params'),
+    validateRequest(UpdateClientApiTokenSchema, 'body'),
+    updateClientApiToken
 );
 
 export default router;
