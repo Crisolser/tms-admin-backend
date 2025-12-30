@@ -30,9 +30,8 @@ export const createClient = async (req, res, next) => {
 
 export const getClientById = async (req, res, next) => {
     try {
-        const { id } = req.params;
-        // Implement ClientService.getById similar to AdminService.getById
-        const client = {};
+        const { id } = req.validated.params;
+        const client = await ClientService.getById(id);
         const message = APP_MESSAGES.CLIENT.GET_ONE(id);
         const additionalData = { client };
         return successHandler(req, res, { message, additionalData });

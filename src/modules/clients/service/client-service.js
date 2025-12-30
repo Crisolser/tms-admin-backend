@@ -37,7 +37,14 @@ const create = async data => {
     return newClient;
 }
 
+const getById = async id => {
+    const client = await ClientRepository.findOneById(id);
+    if (!client) throw error(APP_MESSAGES.CLIENT.NOT_FOUND(id), {}, HTTP_STATUS.NOT_FOUND);
+    return client;
+}
+
 export default {
     getAll,
     create,
+    getById,
 };

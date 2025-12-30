@@ -2,7 +2,8 @@ import { Router } from 'express';
 import { validateRequest, validatePermission } from '#middlewares';
 import {
     ListClientsSchema,
-    CreateClientSchema
+    CreateClientSchema,
+    GetClientSchema
 } from '#clientmodule/schemas/index';
 import {
     getClients,
@@ -32,6 +33,7 @@ router.post(
 router.get(
     '/:id', 
     validatePermission('client:read'),
+    validateRequest(GetClientSchema, 'params'),
     getClientById
 );
 
