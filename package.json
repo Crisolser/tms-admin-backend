@@ -33,7 +33,8 @@
     "#catalogs-data": "./src/seeders/catalogs/index.js",
     "#dummy-data": "./src/seeders/dummy/index.js",
     "#authmodule/*": "./src/modules/auth/*.js",
-    "#adminsmodule/*": "./src/modules/admins/*.js"
+    "#adminsmodule/*": "./src/modules/admins/*.js",
+    "#clientmodule/*": "./src/modules/clients/*.js"
   },
   "dependencies": {
     "@scalar/express-api-reference": "^0.8.30",

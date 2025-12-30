@@ -34,4 +34,13 @@ export const APP_MESSAGES = {
         GET_ROLES: id => `Roles del administrador con ID ${id} obtenidos correctamente`,
         UPDATE_ROLES: id => `Roles del administrador con ID ${id} actualizados correctamente`,
     },
+    CLIENT: {
+        GET_LIST: 'Lista de clientes obtenida',
+        GET_ONE: id => `Cliente con ID ${id} obtenido`,
+        CREATED: 'Cliente registrado',
+        UPDATED: id => `Cliente con ID ${id} actualizado`,
+        DELETED: id => `Cliente con ID ${id} eliminado correctamente`,
+        NOT_FOUND: id => `Cliente con ID ${id} no encontrado`,
+        PASSWORD_CHANGED: id => `Contraseña del cliente con ID ${id} cambiada correctamente`,
+    },
 }
