@@ -47,6 +47,7 @@ export const APP_MESSAGES = {
         UPDATED_API_TOKEN: (clientId, tokenId) => `Token API con ID ${tokenId} para el cliente con ID ${clientId} actualizado correctamente`,
         REVOKED_API_TOKEN: (clientId, tokenId) => `Token API con ID ${tokenId} para el cliente con ID ${clientId} revocado correctamente`,
         API_TOKEN_NOT_BELONGS_TO_CLIENT: (tokenId, clientId) => `El token API con ID ${tokenId} no pertenece al cliente con ID ${clientId}`,
+        API_TOKEN_NOT_FOUND: tokenId => `Token API con ID ${tokenId} no encontrado`,
         DELETED_API_TOKEN: (clientId, tokenId) => `Token API con ID ${tokenId} para el cliente con ID ${clientId} eliminado correctamente`,
     },
 }

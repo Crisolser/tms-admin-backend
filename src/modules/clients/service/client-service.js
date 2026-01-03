@@ -108,7 +108,7 @@ const deleteApiToken = async (id, tokenId) => {
     const client = await ClientRepository.findOneById(id);
     if (!client) throw error(APP_MESSAGES.CLIENT.NOT_FOUND(id), {}, HTTP_STATUS.NOT_FOUND);
     const token = await ClientRepository.findApiTokenById(tokenId);
-    if (!token) throw error(APP_MESSAGES.CLIENT.NOT_FOUND(tokenId), {}, HTTP_STATUS.NOT_FOUND);
+    if (!token) throw error(APP_MESSAGES.CLIENT.API_TOKEN_NOT_FOUND(tokenId), {}, HTTP_STATUS.NOT_FOUND);
     if (token.client_id !== id) throw error(APP_MESSAGES.CLIENT.API_TOKEN_NOT_BELONGS_TO_CLIENT(tokenId, id));
     await ClientRepository.deleteApiToken(tokenId);
     return;

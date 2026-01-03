@@ -43,7 +43,7 @@ export const ListClientsSchema = z.object({
             val => val === '' ? undefined : val
         )
         .transform(
-            val => val ? val.replace(/\s+/g, '') : undefined
+            val => val ? val.replace(/\s+/g, ' ') : undefined
         )
         .optional(),
     status: z

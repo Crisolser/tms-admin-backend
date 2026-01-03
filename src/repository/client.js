@@ -1,4 +1,4 @@
-import { Op, fn, col, where as wh} from 'sequelize';
+import { Op, fn, col, where as wh } from 'sequelize';
 import models from '#models';
 
 const { Client, ClientApiToken } = models;
@@ -11,7 +11,7 @@ const findMany = async (filters) => {
     if (email !== undefined) where.email = { [Op.iLike]: `%${email}%` };
     if (phone !== undefined) where.phone = { [Op.iLike]: `%${phone}%` };
     if (status !== undefined) where.status = status;
-    if (name !== undefined) where[Op.and] = wh(fn('concat', col('name'), col('surname')), { [Op.iLike]: `%${name}%` });
+    if (name !== undefined) where[Op.and] = wh(fn('concat', col('name'), ' ',col('surname')), { [Op.iLike]: `%${name}%` });
     
     const { rows, count } = await Client.findAndCountAll({
         where,
