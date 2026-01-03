@@ -123,7 +123,10 @@ export const updateClientApiToken = async (req, res, next) => {
 
 export const deleteClientApiToken = async (req, res, next) => {
     try {
-        // To be implemented
+        const { id, tokenId } = req.validated.params;
+        await ClientService.deleteApiToken(id, tokenId);
+        const message = APP_MESSAGES.CLIENT.DELETED_API_TOKEN(id, tokenId);
+        return successHandler(req, res, { message });
     } 
     catch (err) {
         return next(err);

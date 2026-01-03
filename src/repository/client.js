@@ -78,6 +78,11 @@ const updateApiToken = async (tokenId, changes) => {
     return;
 }
 
+const deleteApiToken = async (tokenId) => {
+    await ClientApiToken.destroy({ where: { id: tokenId } });
+    return;
+}
+
 export default {
     findMany,
     findOneById,
@@ -88,5 +93,6 @@ export default {
     createApiToken,
     getApiTokens,
     findApiTokenById,
-    updateApiToken
+    updateApiToken,
+    deleteApiToken,
 };

@@ -18,7 +18,8 @@ import {
     changeClientPassword,
     createClientApiToken,
     getClientApiTokens,
-    updateClientApiToken
+    updateClientApiToken,
+    deleteClientApiToken
 } from '#clientmodule/controller/client-controller';
 
 const router = Router();
@@ -87,6 +88,13 @@ router.put(
     validateRequest(GetClientApiTokenSchema, 'params'),
     validateRequest(UpdateClientApiTokenSchema, 'body'),
     updateClientApiToken
+);
+
+router.delete(
+    '/:id/api-tokens/:tokenId',
+    validatePermission('client:manage-api-token'),
+    validateRequest(GetClientApiTokenSchema, 'params'),
+    deleteClientApiToken
 );
 
 export default router;
