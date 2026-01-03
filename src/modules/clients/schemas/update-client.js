@@ -3,32 +3,24 @@ import { LIST_STATUS, STATUS_DESCRIPTIONS } from '#enums';
 
 const LIST_STATUS_OPTIONS = LIST_STATUS.map(status => `[${status}: ${STATUS_DESCRIPTIONS[status]}]`).join(', ');
 
-
-export const UpdateAdminSchema = z.object({
+export const UpdateClientSchema = z.object({
     name: z
         .string({
             message: 'Debe ser una cadena de texto',
         })
-        .min(2, { message: 'El nombre debe tener al menos 2 caracteres' })
-        .max(50, { message: 'El nombre debe tener máximo 50 caracteres' })
+        .min(1, { message: 'El nombre debe tener al menos 1 caracter' })
+        .max(50, { message: 'Debe tener máximo 50 caracteres' })
         .optional(),
-    paternal_surname: z
+    surname: z
         .string({
             message: 'Debe ser una cadena de texto',
         })
-        .min(2, { message: 'El apellido paterno debe tener al menos 2 caracteres' })
-        .max(50, { message: 'El apellido paterno debe tener máximo 50 caracteres' })
-        .optional(),
-    maternal_surname: z
-        .string({
-            message: 'Debe ser una cadena de texto',
-        })
-        .min(2, { message: 'El apellido materno debe tener al menos 2 caracteres' })
-        .max(50, { message: 'El apellido materno debe tener máximo 50 caracteres' })
+        .min(1, { message: 'El apellido debe tener al menos 1 caracter' })
+        .max(50, { message: 'Debe tener máximo 50 caracteres' })
         .optional(),
     email: z
         .email({ 
-            message: 'Debe ser un correo electrónico válido' 
+            message: 'Debe ser un correo electrónico válido'
         })
         .toLowerCase()
         .max(100, { message: 'Debe tener máximo 100 caracteres' })

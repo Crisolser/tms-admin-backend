@@ -12,9 +12,10 @@ const ClientApiToken = sequelize.define('ClientApiToken', {
         allowNull: false,
     },
     token: {
-        type: DataTypes.STRING(255),
+        type: DataTypes.UUID,
         allowNull: false,
         unique: true,
+        defaultValue: DataTypes.UUIDV4,
     },
     is_active: {
         type: DataTypes.BOOLEAN,

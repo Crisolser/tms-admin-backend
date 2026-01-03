@@ -49,7 +49,7 @@ const Client = sequelize.define('Client', {
 },
 {
     tableName: 'client',
-    timestamps: false,
+    timestamps: true,
     underscored: true,
     paranoid: true,
     deletedAt: 'deleted_at',
