@@ -50,4 +50,12 @@ export const APP_MESSAGES = {
         API_TOKEN_NOT_FOUND: tokenId => `Token API con ID ${tokenId} no encontrado`,
         DELETED_API_TOKEN: (clientId, tokenId) => `Token API con ID ${tokenId} para el cliente con ID ${clientId} eliminado correctamente`,
     },
+    ROLE: {
+        GET_LIST: 'Lista de roles obtenida',
+        GET_ONE: id => `Rol con ID ${id} obtenido`,
+        CREATED: 'Rol creado correctamente',
+        UPDATED: id => `Rol con ID ${id} actualizado correctamente`,
+        DELETED: id => `Rol con ID ${id} eliminado correctamente`,
+        NOT_FOUND: id => `Rol con ID ${id} no encontrado`,
+    }
 }

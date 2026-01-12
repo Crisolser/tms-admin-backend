@@ -1,36 +1,47 @@
 import { Router } from 'express';
 import { validateRequest, validatePermission } from '#middlewares';
+import {
+    getRoles,
+    createRole,
+    getRoleById,
+    updateRole,
+    deleteRole
+} from '#rolesmodule/controller/role-controller';
+import {
+    ListRolesSchema
+} from '#rolesmodule/schemas/index';
 
 const router = Router();
 
 router.get(
     '/', 
     validatePermission('role:read'),
-    (req, res) => res.send('List Roles')
+    validateRequest(ListRolesSchema, 'query'),
+    getRoles
 );
 
 router.post(
     '/', 
     validatePermission('role:create'),
-    (req, res) => res.send('Create Role')
+    createRole
 );
 
 router.get(
     '/:id', 
     validatePermission('role:read'),
-    (req, res) => res.send(`Get Role ${req.params.id}`)
+    getRoleById
 );
 
 router.put(
     '/:id', 
     validatePermission('role:update'),
-    (req, res) => res.send(`Update Role ${req.params.id}`)
+    updateRole
 );
 
 router.delete(
     '/:id', 
     validatePermission('role:delete'),
-    (req, res) => res.send(`Delete Role ${req.params.id}`)
+    deleteRole
 );
 
 export default router;
