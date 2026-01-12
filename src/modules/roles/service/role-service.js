@@ -4,6 +4,7 @@ import {
 } from '#helpers';
 import RoleRepository from '#repository/role';
 import { APP_MESSAGES, HTTP_STATUS } from '#constants';
+import { existRoleByName } from '#rolesmodule/core/index';
 
 const getAll = async filters => {
     const { page, limit, ...filterParameters } = filters;
@@ -25,6 +26,13 @@ const getAll = async filters => {
     return rolesData;
 };
 
+const create = async data => {
+    await existRoleByName(data.name);
+    const newRole = await RoleRepository.create(data);
+    return newRole;
+}
+
 export default {
     getAll,
+    create,
 };

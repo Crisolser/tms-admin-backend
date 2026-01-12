@@ -57,5 +57,6 @@ export const APP_MESSAGES = {
         UPDATED: id => `Rol con ID ${id} actualizado correctamente`,
         DELETED: id => `Rol con ID ${id} eliminado correctamente`,
         NOT_FOUND: id => `Rol con ID ${id} no encontrado`,
+        ALREADY_EXISTS: name => `El rol con nombre '${name}' ya existe`,
     }
 }

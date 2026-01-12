@@ -17,8 +17,8 @@ export const getRoles = async (req, res, next) => {
 
 export const createRole = async (req, res, next) => {
     try {
-        const data = req.body;
-        const newRoleId = 'new-role-id';
+        const data = req.validated.body;
+        const newRoleId = await RoleService.create(data);
         const message = APP_MESSAGES.ROLE.CREATED;
         const additionalData = { role_id: newRoleId };
         return successHandler(req, res, { message, additionalData });

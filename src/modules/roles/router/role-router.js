@@ -8,7 +8,8 @@ import {
     deleteRole
 } from '#rolesmodule/controller/role-controller';
 import {
-    ListRolesSchema
+    ListRolesSchema,
+    CreateRoleSchema
 } from '#rolesmodule/schemas/index';
 
 const router = Router();
@@ -23,6 +24,7 @@ router.get(
 router.post(
     '/', 
     validatePermission('role:create'),
+    validateRequest(CreateRoleSchema, 'body'),
     createRole
 );
 

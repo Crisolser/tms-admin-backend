@@ -28,7 +28,18 @@ const findMany = async (filters) => {
     };
 }
 
+const findOneByName = async name => {
+    return await Role.findOne({ where: { name } });
+}
+
+const create = async data => {
+    const { id } = await Role.create(data);
+    return id;
+}
+
 export default {
     findAll,
     findMany,
+    findOneByName,
+    create,
 };
