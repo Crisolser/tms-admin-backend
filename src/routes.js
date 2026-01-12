@@ -2,7 +2,8 @@ import { Router } from 'express';
 import { authSession } from '#middlewares';
 import AuthRouter from '#authmodule/router/auth-router';
 import AdminRouter from '#adminsmodule/router/admin-router';
-import ClientRouter from '#clientmodule/router/client-router';
+import ClientRouter from '#clientsmodule/router/client-router';
+import RoleRouter from '#rolesmodule/router/role-router';
 
 const router = Router();
 
@@ -13,5 +14,6 @@ router.get('/health', (req, res) => {
 router.use(authSession);
 router.use('/admins', AdminRouter);
 router.use('/clients', ClientRouter);
+router.use('/roles', RoleRouter);
 
 export default router;

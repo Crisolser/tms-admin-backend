@@ -8,7 +8,7 @@ import {
     ChangePasswordSchema,
     GetClientApiTokenSchema,
     UpdateClientApiTokenSchema
-} from '#clientmodule/schemas/index';
+} from '#clientsmodule/schemas/index';
 import {
     getClients,
     createClient,
@@ -20,7 +20,7 @@ import {
     getClientApiTokens,
     updateClientApiToken,
     deleteClientApiToken
-} from '#clientmodule/controller/client-controller';
+} from '#clientsmodule/controller/client-controller';
 
 const router = Router();
 

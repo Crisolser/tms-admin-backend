@@ -34,7 +34,8 @@
     "#dummy-data": "./src/seeders/dummy/index.js",
     "#authmodule/*": "./src/modules/auth/*.js",
     "#adminsmodule/*": "./src/modules/admins/*.js",
-    "#clientmodule/*": "./src/modules/clients/*.js"
+    "#clientsmodule/*": "./src/modules/clients/*.js",
+    "#rolesmodule/*": "./src/modules/roles/*.js"
   },
   "dependencies": {
     "@scalar/express-api-reference": "^0.8.30",
