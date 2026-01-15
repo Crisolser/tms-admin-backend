@@ -1,6 +1,7 @@
 import { successHandler } from '#helpers';
 import { APP_MESSAGES } from '#constants';
 import RoleService from '#rolesmodule/service/role-service';
+import role from '#repository/role';
 
 export const getRoles = async (req, res, next) => {
     try {
@@ -30,8 +31,8 @@ export const createRole = async (req, res, next) => {
 
 export const getRoleById = async (req, res, next) => {
     try {
-        const { id } = req.params;
-        const role = {};
+        const { id } = req.validated.params;
+        const role = await RoleService.getById(id);
         const message = APP_MESSAGES.ROLE.GET_ONE(id);
         const additionalData = { role };
         return successHandler(req, res, { message, additionalData });
@@ -43,11 +44,11 @@ export const getRoleById = async (req, res, next) => {
 
 export const updateRole = async (req, res, next) => {
     try {
-        const { id } = req.params;
-        const changes = req.body;
-        const updatedRole = { id, ...changes };
+        const { id } = req.validated.params;
+        const changes = req.validated.body;
+        const updatedRole = await RoleService.update(id, changes);
         const message = APP_MESSAGES.ROLE.UPDATED(id);
-        const additionalData = { role: updatedRole };
+        const additionalData = { ...updatedRole };
         return successHandler(req, res, { message, additionalData });
     }
     catch (err) {
@@ -57,9 +58,11 @@ export const updateRole = async (req, res, next) => {
 
 export const deleteRole = async (req, res, next) => {
     try {
-        const { id } = req.params;
+        const { id } = req.validated.params;
+        await RoleService.remove(id);
         const message = APP_MESSAGES.ROLE.DELETED(id);
-        return successHandler(req, res, { message });
+        const additionalData = {role_id: id};
+        return successHandler(req, res, { message, additionalData });
     }
     catch (err) {
         return next(err);

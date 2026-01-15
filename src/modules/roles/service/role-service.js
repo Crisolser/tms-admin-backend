@@ -32,7 +32,38 @@ const create = async data => {
     return newRole;
 }
 
+const getById = async id => {
+    const role = await RoleRepository.findOne( id );
+    if (!role) throw error(APP_MESSAGES.ROLE.NOT_FOUND(id), HTTP_STATUS.NOT_FOUND);
+    return role;
+}
+
+const update = async (id, changes) => {
+    const role = await RoleRepository.findOne( id );
+    if (!role) throw error(APP_MESSAGES.ROLE.NOT_FOUND(id), HTTP_STATUS.NOT_FOUND);
+    const { newData, oldData } = comparateChanges(changes, role);
+    if (newData.name) await existRoleByName(newData.name, id);
+    await RoleRepository.update(id, newData);
+    const updatedFields = Object.keys(newData);
+    return {
+        updated_fields: updatedFields,
+        new_data: newData,
+        old_data: oldData
+    };
+}
+
+const remove = async id => {
+    const role = await RoleRepository.findOne( id );
+    if (!role) throw error(APP_MESSAGES.ROLE.NOT_FOUND(id), HTTP_STATUS.NOT_FOUND);
+    await RoleRepository.remove(id);
+    return;
+}
+
+
 export default {
     getAll,
     create,
+    getById,
+    update,
+    remove
 };

@@ -28,6 +28,10 @@ const findMany = async (filters) => {
     };
 }
 
+const findOne = async (id) => {
+    return await Role.findOne({ where: { id } });
+}
+
 const findOneByName = async name => {
     return await Role.findOne({ where: { name } });
 }
@@ -37,9 +41,21 @@ const create = async data => {
     return id;
 }
 
+const update = async (id, changes) => {
+    await Role.update(changes, { where: { id } });
+}
+
+const remove = async id => {
+    const role = await Role.findOne({ where: { id } });
+    await role.destroy();
+}
+
 export default {
     findAll,
     findMany,
+    findOne,
     findOneByName,
     create,
+    update,
+    remove
 };

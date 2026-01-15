@@ -9,7 +9,9 @@ import {
 } from '#rolesmodule/controller/role-controller';
 import {
     ListRolesSchema,
-    CreateRoleSchema
+    CreateRoleSchema,
+    GetRoleSchema,
+    UpdateRoleSchema
 } from '#rolesmodule/schemas/index';
 
 const router = Router();
@@ -31,18 +33,22 @@ router.post(
 router.get(
     '/:id', 
     validatePermission('role:read'),
+    validateRequest(GetRoleSchema, 'params'),
     getRoleById
 );
 
 router.put(
     '/:id', 
     validatePermission('role:update'),
+    validateRequest(GetRoleSchema, 'params'),
+    validateRequest(UpdateRoleSchema, 'body'),
     updateRole
 );
 
 router.delete(
     '/:id', 
     validatePermission('role:delete'),
+    validateRequest(GetRoleSchema, 'params'),
     deleteRole
 );
 
