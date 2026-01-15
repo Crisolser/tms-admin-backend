@@ -1,7 +1,6 @@
 import { successHandler } from '#helpers';
 import { APP_MESSAGES } from '#constants';
 import RoleService from '#rolesmodule/service/role-service';
-import role from '#repository/role';
 
 export const getRoles = async (req, res, next) => {
     try {

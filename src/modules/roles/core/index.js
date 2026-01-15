@@ -1,1 +1,1 @@
-export * from '#rolesmodule/core/exist-role';
+export * from '#rolesmodule/core/exist-role-by-name';

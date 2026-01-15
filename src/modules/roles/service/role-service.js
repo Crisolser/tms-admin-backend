@@ -42,7 +42,7 @@ const update = async (id, changes) => {
     const role = await RoleRepository.findOne( id );
     if (!role) throw error(APP_MESSAGES.ROLE.NOT_FOUND(id), HTTP_STATUS.NOT_FOUND);
     const { newData, oldData } = comparateChanges(changes, role);
-    if (newData.name) await existRoleByName(newData.name, id);
+    if (newData.name) await existRoleByName(newData.name);
     await RoleRepository.update(id, newData);
     const updatedFields = Object.keys(newData);
     return {

@@ -26,29 +26,29 @@ const findMany = async (filters) => {
         roles: rows,
         total: count,
     };
-}
+};
 
 const findOne = async (id) => {
     return await Role.findOne({ where: { id } });
-}
+};
 
 const findOneByName = async name => {
     return await Role.findOne({ where: { name } });
-}
+};
 
 const create = async data => {
     const { id } = await Role.create(data);
     return id;
-}
+};
 
 const update = async (id, changes) => {
     await Role.update(changes, { where: { id } });
-}
+};
 
 const remove = async id => {
     const role = await Role.findOne({ where: { id } });
     await role.destroy();
-}
+};
 
 export default {
     findAll,

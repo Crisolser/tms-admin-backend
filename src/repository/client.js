@@ -42,46 +42,46 @@ const findOneByEmail = async email => {
 const create = async data => {
     const { id } = await Client.create(data);
     return id;
-}
+};
 
 const update = async (id, data) => {
     await Client.update(data, { where: { id } });
     return;
-}
+};
 
 const softRemove = async id => {
     const client = await Client.findByPk(id);
     await client.destroy();
     return;
-}
+};
 
 const createApiToken = async (id) => {
     const token = await ClientApiToken.create(
         { client_id: id }
     );
     return token;
-}
+};
 
 const getApiTokens = async (id) => {
     return await ClientApiToken.findAll({
         where: { client_id: id },
         attributes: { exclude: ['client_id'] },
     });
-}
+};
 
 const findApiTokenById = async (tokenId) => {
     return await ClientApiToken.findByPk(tokenId);
-}
+};
 
 const updateApiToken = async (tokenId, changes) => {
     await ClientApiToken.update(changes, { where: { id: tokenId } });
     return;
-}
+};
 
 const deleteApiToken = async (tokenId) => {
     await ClientApiToken.destroy({ where: { id: tokenId } });
     return;
-}
+};
 
 export default {
     findMany,
