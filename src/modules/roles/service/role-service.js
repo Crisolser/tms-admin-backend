@@ -76,12 +76,13 @@ const getPermissions = async id => {
 };
 
 const updatePermissions = async (id, permissions) => {
-    await existRoleById(id);
+    const role = await RoleRepository.findOne( id );
+    if (!role) throw error(APP_MESSAGES.ROLE.NOT_FOUND(id), HTTP_STATUS.NOT_FOUND);
     const permissionsIds = permissions.map(perm => perm.id);
     const allPermissions = await PermissionRepository.findAll();
     const allPermissionsIds = allPermissions.map(perm => perm.id);
     const invalidPermissions = permissions.filter(perm => !allPermissionsIds.includes(perm.id));
-    if (invalidPermissions.length > 0) throw error(APP_MESSAGES.ROLE.INVALID_PERMISSIONS,{ invalid_permissions: invalidPermissions });
+    if (invalidPermissions.length > 0) throw error(APP_MESSAGES.ROLE.INVALID_PERMISSIONS, { invalid_permissions: invalidPermissions });
     const validPermissions = allPermissions.filter(perm => permissionsIds.includes(perm.id));
     const rolePermissions = await RoleRepository.getPermissions(id);
     const rolePermissionIds = rolePermissions.map(perm => perm.id);
@@ -92,10 +93,10 @@ const updatePermissions = async (id, permissions) => {
     const toAddCodes = toAdd.map(perm => perm.code);
     const toRemoveCodes = toRemove.map(perm => perm.code);
 
-    if (toAdd.length > 0) await RoleRepository.addPermissions(id, toAddIds);
-    if (toRemove.length > 0) await RoleRepository.removePermissions(id, toRemoveIds);
+    if (toAdd.length > 0) await role.addPermissions(toAddIds);
+    if (toRemove.length > 0) await role.removePermissions(toRemoveIds);
     
-    return{
+    return {
         added: toAddCodes,
         removed: toRemoveCodes
     };

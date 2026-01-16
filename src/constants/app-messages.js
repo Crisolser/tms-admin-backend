@@ -1,5 +1,3 @@
-import { INVALID } from "zod/v3";
-
 export const APP_MESSAGES = {
     ERROR: {
         INVALID_PARAMS: 'Parámetros inválidos',
