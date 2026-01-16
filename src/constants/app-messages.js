@@ -1,3 +1,5 @@
+import { INVALID } from "zod/v3";
+
 export const APP_MESSAGES = {
     ERROR: {
         INVALID_PARAMS: 'Parámetros inválidos',
@@ -58,5 +60,8 @@ export const APP_MESSAGES = {
         DELETED: id => `Rol con ID ${id} eliminado correctamente`,
         NOT_FOUND: id => `Rol con ID ${id} no encontrado`,
         ALREADY_EXISTS: name => `El rol con nombre '${name}' ya existe`,
+        GET_PERMISSIONS: id => `Permisos del rol con ID ${id} obtenidos correctamente`,
+        UPDATED_PERMISSIONS: id => `Permisos del rol con ID ${id} actualizados correctamente`,
+        INVALID_PERMISSIONS: 'Permisos inválidos detectados',
     }
 }

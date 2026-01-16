@@ -50,6 +50,21 @@ const remove = async id => {
     await role.destroy();
 };
 
+const getPermissions = async id => {
+    const role = await Role.findOne({ where: { id } });
+    return await role.getPermissions();
+};
+
+const addPermissions = async (id, permissions) => {
+    const role = await Role.findOne({ where: { id } });
+    await role.addPermissions(permissions);
+};
+
+const removePermissions = async (id, permissions) => {
+    const role = await Role.findOne({ where: { id } });
+    await role.removePermissions(permissions);
+};
+
 export default {
     findAll,
     findMany,
@@ -57,5 +72,8 @@ export default {
     findOneByName,
     create,
     update,
-    remove
+    remove,
+    getPermissions,
+    addPermissions,
+    removePermissions
 };
