@@ -68,10 +68,42 @@ export const deleteRole = async (req, res, next) => {
     }
 };
 
+export const getRolePermissions = async (req, res, next) => {
+    try {
+        const { id } = req.validated.params;
+        const permissions = await RoleService.getPermissions(id);
+        const message = APP_MESSAGES.ROLE.GET_PERMISSIONS(id);
+        const additionalData = { permissions };
+        return successHandler(req, res, { message, additionalData });
+    }
+    catch (err) {
+        return next(err);
+    }
+};
+
+export const updateRolePermissions = async (req, res, next) => {
+    try {
+        const { id } = req.validated.params;
+        const { permissions } = req.validated.body;
+        const { added, removed } = await RoleService.updatePermissions(id, permissions);
+        const message = APP_MESSAGES.ROLE.UPDATED_PERMISSIONS(id);
+        const additionalData = { 
+            permissions_added: added, 
+            permissions_removed: removed 
+        };
+        return successHandler(req, res, { message, additionalData });
+    }
+    catch (err) {
+        return next(err);
+    }
+};
+
 export default {
     getRoles,
     createRole,
     getRoleById,
     updateRole,
-    deleteRole
+    deleteRole,
+    getRolePermissions,
+    updateRolePermissions
 };
