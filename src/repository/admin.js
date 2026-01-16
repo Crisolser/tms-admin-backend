@@ -26,7 +26,7 @@ const findMany = async (filters) => {
         admins: rows,
         total: count,
     };
-}
+};
 
 const findOneById = async id => {
     return await Admin.findByPk(id, {
@@ -44,18 +44,18 @@ const findOneByEmail = async email => {
 const create = async data => {
     const { id } = await Admin.create(data);
     return id;
-}
+};
 
 const update = async (id, data) => {
     await Admin.update(data, { where: { id } });
     return;
-}
+};
 
 const softRemove = async id => {
     const admin = await Admin.findByPk(id);
     await admin.destroy();
     return;
-}
+};
 
 const getRoles = async id => {
     const admin = await Admin.findByPk(id);
@@ -78,7 +78,7 @@ const removeRoles = async (id, roles) => {
     const admin = await Admin.findByPk(id);
     await admin.removeRoles(roles);
     return;
-}
+};
 
 const getPermissions = async id => {
     const query = `

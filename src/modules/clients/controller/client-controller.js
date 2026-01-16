@@ -1,6 +1,6 @@
 import { successHandler } from '#helpers';
 import { APP_MESSAGES } from '#constants';
-import ClientService from '#clientmodule/service/client-service';
+import ClientService from '#clientsmodule/service/client-service';
 
 export const getClients = async (req, res, next) => {
     try {

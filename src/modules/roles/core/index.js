@@ -1,0 +1,1 @@
+export * from '#rolesmodule/core/exist-role-by-name';

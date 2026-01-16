@@ -5,8 +5,8 @@ import {
 } from '#helpers';
 import ClientRepository from '#repository/client';
 import { APP_MESSAGES, HTTP_STATUS } from '#constants';
-import { existEmailInClient } from '#clientmodule/core/index';
-import { apiTokenCreatedDto } from '#clientmodule/interface/index';
+import { existEmailInClient } from '#clientsmodule/core/index';
+import { apiTokenCreatedDto } from '#clientsmodule/interface/index';
 
 const getAll = async filters => {
     const { page, limit, ...filterParameters } = filters;
