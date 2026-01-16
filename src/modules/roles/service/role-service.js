@@ -30,13 +30,13 @@ const create = async data => {
     await existRoleByName(data.name);
     const newRole = await RoleRepository.create(data);
     return newRole;
-}
+};
 
 const getById = async id => {
     const role = await RoleRepository.findOne( id );
     if (!role) throw error(APP_MESSAGES.ROLE.NOT_FOUND(id), HTTP_STATUS.NOT_FOUND);
     return role;
-}
+};
 
 const update = async (id, changes) => {
     const role = await RoleRepository.findOne( id );
@@ -50,14 +50,14 @@ const update = async (id, changes) => {
         new_data: newData,
         old_data: oldData
     };
-}
+};
 
 const remove = async id => {
     const role = await RoleRepository.findOne( id );
     if (!role) throw error(APP_MESSAGES.ROLE.NOT_FOUND(id), HTTP_STATUS.NOT_FOUND);
     await RoleRepository.remove(id);
     return;
-}
+};
 
 
 export default {
