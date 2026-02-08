@@ -1,0 +1,2 @@
+echo "🔍 Aplicar formato a código y validando calidad ..."
+npx lint-staged
