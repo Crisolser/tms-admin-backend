@@ -1,1 +1,1 @@
-export * from  './exist-email.js'
+export * from './exist-email.js';

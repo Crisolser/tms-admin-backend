@@ -1,46 +1,46 @@
 services:
-  backend:
-    build:
-      context: .
-      target: local
-    container_name: backend_app
-    ports:
-      - "${APPPORT:-5001}:5001"
-    env_file:
-      - .env
-    volumes:
-      - ./src:/app/src
-      - ./index.js:/app/index.js
-    depends_on:
-      db:
-        condition: service_healthy
-    restart: always
-    networks:
-      - backend-net
+   backend:
+      build:
+         context: .
+         target: local
+      container_name: backend_app
+      ports:
+         - '${APPPORT:-5001}:5001'
+      env_file:
+         - .env
+      volumes:
+         - ./src:/app/src
+         - ./index.js:/app/index.js
+      depends_on:
+         db:
+            condition: service_healthy
+      restart: always
+      networks:
+         - backend-net
 
-  db:
-    image: postgis/postgis:16-3.4
-    container_name: backend_db
-    restart: always
-    ports:
-      - "${DB_PORT:-5432}:5432"
-    environment:
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: ${DATABASE}
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DATABASE}"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    networks:
-      - backend-net
+   db:
+      image: postgis/postgis:16-3.4
+      container_name: backend_db
+      restart: always
+      ports:
+         - '${DB_PORT:-5432}:5432'
+      environment:
+         POSTGRES_USER: ${DB_USER}
+         POSTGRES_PASSWORD: ${DB_PASSWORD}
+         POSTGRES_DB: ${DATABASE}
+      volumes:
+         - postgres_data:/var/lib/postgresql/data
+      healthcheck:
+         test: ['CMD-SHELL', 'pg_isready -U ${DB_USER} -d ${DATABASE}']
+         interval: 10s
+         timeout: 5s
+         retries: 5
+      networks:
+         - backend-net
 
 volumes:
-  postgres_data:
+   postgres_data:
 
 networks:
-  backend-net:
-    driver: bridge
+   backend-net:
+      driver: bridge

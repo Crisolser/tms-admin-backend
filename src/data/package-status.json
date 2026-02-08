@@ -1,38 +1,38 @@
 [
-    {
-        "name": "CREADO",
-        "description": "El paquete ha sido creado y está pendiente de ser recogido."
-    },
-    {
-        "name": "ASIGNADO A MENSAJERO",
-        "description": "El paquete ha sido asignado a un mensajero para su recogida."
-    },
-    {
-        "name": "RECOLECTADO",
-        "description": "El paquete ha sido recogido por el mensajero."
-    },
-    {
-        "name": "EN CURSO",
-        "description": "El paquete está en tránsito hacia su destino."
-    },
-    {
-        "name": "ENTREGADO",
-        "description": "El paquete ha sido entregado al destinatario."
-    },
-    {
-        "name": "NO ENTREGADO",
-        "description": "El mensajero no ha podido entregar el paquete al destinatario."
-    },
-    {
-        "name": "DEVUELTO",
-        "description": "El paquete ha sido devuelto al remitente."
-    },
-    {
-        "name": "CANCELADO",
-        "description": "El envío del paquete ha sido cancelado."
-    },
-    {
-        "name": "PAUSADO",
-        "description": "El envío del paquete está temporalmente en pausa."
-    }
+   {
+      "name": "CREADO",
+      "description": "El paquete ha sido creado y está pendiente de ser recogido."
+   },
+   {
+      "name": "ASIGNADO A MENSAJERO",
+      "description": "El paquete ha sido asignado a un mensajero para su recogida."
+   },
+   {
+      "name": "RECOLECTADO",
+      "description": "El paquete ha sido recogido por el mensajero."
+   },
+   {
+      "name": "EN CURSO",
+      "description": "El paquete está en tránsito hacia su destino."
+   },
+   {
+      "name": "ENTREGADO",
+      "description": "El paquete ha sido entregado al destinatario."
+   },
+   {
+      "name": "NO ENTREGADO",
+      "description": "El mensajero no ha podido entregar el paquete al destinatario."
+   },
+   {
+      "name": "DEVUELTO",
+      "description": "El paquete ha sido devuelto al remitente."
+   },
+   {
+      "name": "CANCELADO",
+      "description": "El envío del paquete ha sido cancelado."
+   },
+   {
+      "name": "PAUSADO",
+      "description": "El envío del paquete está temporalmente en pausa."
+   }
 ]

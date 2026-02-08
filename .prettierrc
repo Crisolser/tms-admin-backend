@@ -1,0 +1,28 @@
+{
+   "semi": true,
+   "singleQuote": true,
+   "trailingComma": "es5",
+   "printWidth": 100,
+   "tabWidth": 3,
+   "arrowParens": "avoid",
+   "overrides": [
+      {
+         "files": "src/modules/*/schemas/**/*.js",
+         "options": {
+            "printWidth": 150
+         }
+      },
+      {
+         "files": "src/modules/*/service/**/*.js",
+         "options": {
+            "printWidth": 150
+         }
+      },
+      {
+         "files": "src/middlewares/**/*.js",
+         "options": {
+            "printWidth": 150
+         }
+      }
+   ]
+}

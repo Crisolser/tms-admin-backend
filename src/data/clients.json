@@ -1,30 +1,30 @@
 [
-    {
-        "name": "client1",
-        "surname": "surname1",
-        "email": "client1@example.com",
-        "phone": "1234567890",
-        "password": "Password#123"
-    },
-    {
-        "name": "client2",
-        "surname": "surname2",
-        "email": "client2@example.com",
-        "phone": "0987654321",
-        "password": "Password#123"
-    },
-    {
-        "name": "client3",
-        "surname": "surname3",
-        "email": "client3@example.com",
-        "phone": "1122334455",
-        "password": "Password#123"
-    },
-    {
-        "name": "client4",
-        "surname": "surname4",
-        "email": "client4@example.com",
-        "phone": "5566778899",
-        "password": "Password#123"
-    }
+   {
+      "name": "client1",
+      "surname": "surname1",
+      "email": "client1@example.com",
+      "phone": "1234567890",
+      "password": "Password#123"
+   },
+   {
+      "name": "client2",
+      "surname": "surname2",
+      "email": "client2@example.com",
+      "phone": "0987654321",
+      "password": "Password#123"
+   },
+   {
+      "name": "client3",
+      "surname": "surname3",
+      "email": "client3@example.com",
+      "phone": "1122334455",
+      "password": "Password#123"
+   },
+   {
+      "name": "client4",
+      "surname": "surname4",
+      "email": "client4@example.com",
+      "phone": "5566778899",
+      "password": "Password#123"
+   }
 ]

@@ -17,31 +17,31 @@ import PackageStatusHistory from './package-status-history.js';
 import Item from './item.js';
 
 const models = {
-    Admin,
-    AdminRole,
-    Role,
-    RolePermission,
-    Permission,
-    Client,
-    ClientWarehouse,
-    ClientApiToken,
-    ClientWebhook,
-    Courier,
-    Vehicle,
-    CourierDocument,
-    DocumentType,
-    Package,
-    PackageStatus,
-    PackageStatusHistory,
-    Item,
+   Admin,
+   AdminRole,
+   Role,
+   RolePermission,
+   Permission,
+   Client,
+   ClientWarehouse,
+   ClientApiToken,
+   ClientWebhook,
+   Courier,
+   Vehicle,
+   CourierDocument,
+   DocumentType,
+   Package,
+   PackageStatus,
+   PackageStatusHistory,
+   Item,
 };
 
 Object.values(models).forEach(model => {
-    if (model.associate) {
-        model.associate(models);
-    }
+   if (model.associate) {
+      model.associate(models);
+   }
 });
 
 export default {
-    ...models,
+   ...models,
 };
