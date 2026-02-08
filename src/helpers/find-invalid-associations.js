@@ -24,8 +24,11 @@ import { APP_MESSAGES } from '#constants';
  */
 
 export const findInvalidAssociations = (newAssociations, validAssociations) => {
-  const validIds = validAssociations.map(item => item.id);
-  const invalidAssociations = newAssociations.filter(item => !validIds.includes(item.id));
-  if (invalidAssociations.length > 0) throw error(APP_MESSAGES.ERROR.INVALID_ASSOCIATIONS, { invalid_associations: invalidAssociations });
-  return;
+   const validIds = validAssociations.map(item => item.id);
+   const invalidAssociations = newAssociations.filter(item => !validIds.includes(item.id));
+   if (invalidAssociations.length > 0)
+      throw error(APP_MESSAGES.ERROR.INVALID_ASSOCIATIONS, {
+         invalid_associations: invalidAssociations,
+      });
+   return;
 };

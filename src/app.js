@@ -13,7 +13,7 @@ app.use(syntaxError);
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-  res.send('Bienvenido al API de TMS Admin');
+   res.send('Bienvenido al API de TMS Admin');
 });
 
 app.use('/api', allRoutes);

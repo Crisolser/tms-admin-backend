@@ -1,35 +1,35 @@
 [
-    {
-        "code": "almacen1",
-        "description": "Almacén Principal",
-        "address": "Calle Falsa 123, Ciudad, País",
-        "contact_person": "Juan Pérez",
-        "contact_phone": "5551234567",
-        "zip_code": "12345",
-        "latitude": 19.432608,
-        "longitude": -99.133209,
-        "additional_instructions": "Entrada por la calle 1ra Avenida"
-    },
-    {
-        "code": "almacen2",
-        "description": "Almacén Secundario",
-        "address": "Avenida Siempre Viva 742, Ciudad, País",
-        "contact_person": "María López",
-        "contact_phone": "5559876543",
-        "zip_code": "54321",
-        "latitude": 20.659698,
-        "longitude": -103.349609,
-        "additional_instructions": "Usar el portón trasero"
-    },
-    {
-        "code": "almacen3",
-        "description": "Almacén Temporal",
-        "address": "Boulevard de los Sueños Rotos 456, Ciudad, País",
-        "contact_person": "Carlos Sánchez",
-        "contact_phone": "5556543210",
-        "zip_code": "67890",
-        "latitude": 21.161908,
-        "longitude": -86.851527,
-        "additional_instructions": "Llamar al llegar"
-    }
+   {
+      "code": "almacen1",
+      "description": "Almacén Principal",
+      "address": "Calle Falsa 123, Ciudad, País",
+      "contact_person": "Juan Pérez",
+      "contact_phone": "5551234567",
+      "zip_code": "12345",
+      "latitude": 19.432608,
+      "longitude": -99.133209,
+      "additional_instructions": "Entrada por la calle 1ra Avenida"
+   },
+   {
+      "code": "almacen2",
+      "description": "Almacén Secundario",
+      "address": "Avenida Siempre Viva 742, Ciudad, País",
+      "contact_person": "María López",
+      "contact_phone": "5559876543",
+      "zip_code": "54321",
+      "latitude": 20.659698,
+      "longitude": -103.349609,
+      "additional_instructions": "Usar el portón trasero"
+   },
+   {
+      "code": "almacen3",
+      "description": "Almacén Temporal",
+      "address": "Boulevard de los Sueños Rotos 456, Ciudad, País",
+      "contact_person": "Carlos Sánchez",
+      "contact_phone": "5556543210",
+      "zip_code": "67890",
+      "latitude": 21.161908,
+      "longitude": -86.851527,
+      "additional_instructions": "Llamar al llegar"
+   }
 ]

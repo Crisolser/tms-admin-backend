@@ -9,7 +9,7 @@ const router = Router();
 
 router.use('/auth', AuthRouter);
 router.get('/health', (req, res) => {
-  res.status(200).json({ status: 'OK' });
+   res.status(200).json({ status: 'OK' });
 });
 router.use(authSession);
 router.use('/admins', AdminRouter);

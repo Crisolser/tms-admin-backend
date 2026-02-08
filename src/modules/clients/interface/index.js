@@ -1,1 +1,1 @@
-export * from './api-token-created-dto.js'
+export * from './api-token-created-dto.js';

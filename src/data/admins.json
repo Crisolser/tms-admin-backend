@@ -1,26 +1,26 @@
 [
-    {
-        "name": "SUPER",
-        "paternal_surname": "ADMIN",
-        "maternal_surname": "ISTRADOR",
-        "email": "admin@gmail.com",
-        "phone": "5551234567",
-        "password": "Test#1234"
-    },
-    {
-        "name": "JUAN",
-        "paternal_surname": "GOMEZ",
-        "maternal_surname": "MARTINEZ",
-        "email": "operator@gmail.com",
-        "phone": "5559876543",
-        "password": "Test#1234"
-    },
-    {
-        "name": "YAIR",
-        "paternal_surname": "RODRIGUEZ",
-        "maternal_surname": "LOPEZ",
-        "email": "sales@gmail.com",
-        "phone": "5556543210",
-        "password": "Test#1234"
-    }
+   {
+      "name": "SUPER",
+      "paternal_surname": "ADMIN",
+      "maternal_surname": "ISTRADOR",
+      "email": "admin@gmail.com",
+      "phone": "5551234567",
+      "password": "Test#1234"
+   },
+   {
+      "name": "JUAN",
+      "paternal_surname": "GOMEZ",
+      "maternal_surname": "MARTINEZ",
+      "email": "operator@gmail.com",
+      "phone": "5559876543",
+      "password": "Test#1234"
+   },
+   {
+      "name": "YAIR",
+      "paternal_surname": "RODRIGUEZ",
+      "maternal_surname": "LOPEZ",
+      "email": "sales@gmail.com",
+      "phone": "5556543210",
+      "password": "Test#1234"
+   }
 ]
