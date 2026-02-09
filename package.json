@@ -38,6 +38,7 @@
       "#authmodule/*": "./src/modules/auth/*.js",
       "#adminsmodule/*": "./src/modules/admins/*.js",
       "#clientsmodule/*": "./src/modules/clients/*.js",
+      "#couriersmodule/*": "./src/modules/couriers/*.js",
       "#rolesmodule/*": "./src/modules/roles/*.js"
    },
    "dependencies": {

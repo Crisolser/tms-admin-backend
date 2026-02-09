@@ -54,6 +54,17 @@ export const APP_MESSAGES = {
       DELETED_API_TOKEN: (clientId, tokenId) =>
          `Token API con ID ${tokenId} para el cliente con ID ${clientId} eliminado correctamente`,
    },
+   COURIER: {
+      GET_LIST: 'Lista de mensajeros obtenida',
+      GET_ONE: id => `Mensajero con ID ${id} obtenido`,
+      CREATED: 'Mensajero registrado',
+      UPDATED: id => `Mensajero con ID ${id} actualizado`,
+      DELETED: id => `Mensajero con ID ${id} eliminado correctamente`,
+      NOT_FOUND: id => `Mensajero con ID ${id} no encontrado`,
+      PASSWORD_CHANGED: id => `Contraseña del mensajero con ID ${id} cambiada correctamente`,
+      STATUS_CHANGED: (id, statusId) => `Estado del mensajero con ID ${id} cambiado a ${statusId} correctamente`,
+      GET_PACKAGES: 'Paquetes obtenidos correctamente',
+   },
    ROLE: {
       GET_LIST: 'Lista de roles obtenida',
       GET_ONE: id => `Rol con ID ${id} obtenido`,
