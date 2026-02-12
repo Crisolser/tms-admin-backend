@@ -1,58 +1,86 @@
+import bcrypt from 'bcrypt';
 import { error } from '#helpers';
 import { APP_MESSAGES, HTTP_STATUS } from '#constants';
+import { createPagination } from '#helpers';
+import CourierRepository from '#repository/courier'
+import {
+   existCourierEmail,
+   existCourierPhone,
+   existVehicleType,
+} from '#couriersmodule/core/index';
+import {
+   comparateChanges
+} from '#helpers';
 
-const getAll = filters => {
-   // Placeholder implementation
-   const couriersData = {
-        pagination: {
-            total_records: 0,
-            total_pages: 0,
-            current_page: filters.page || 1,
-            per_page: filters.limit || 10,
-            has_next_page: false,
-            has_previous_page: false,
-        },
-        filters,
-        couriers: [],
+const getAll = async query => {
+   const { limit, page, ...filters } = query 
+   const { couriers, total } = await CourierRepository.findMany(query);
+   const totalPages = Math.ceil(total / limit);
+   const pagination = createPagination(limit, page, totalPages, total); 
+   return {
+      pagination,
+      filters,
+      couriers
    };
-   return couriersData;
 };
 
-const create = data => {
-   // Placeholder implementation
-   const newCourier = { id: 1, ...data };
-   return newCourier;
+const create = async data => {
+   const { email, phone, vehicle_id, password } = data;
+   await existCourierEmail(email);
+   await existCourierPhone(phone);
+   await existVehicleType(vehicle_id);
+   const hashedPassword = await bcrypt.hash(password, 10);
+   const courierId = await CourierRepository.create({ ...data, password: hashedPassword });
+   return courierId;
 };
 
 const getById = id => {
-   // Placeholder implementation
-   if (id != 1) throw error(APP_MESSAGES.COURIER.NOT_FOUND(id), {}, HTTP_STATUS.NOT_FOUND);
-   const courier = { id, name: 'John Doe' };
+   const courier = CourierRepository.findOneById(id);
+   if (!courier) {
+      throw error(APP_MESSAGES.COURIER.NOT_FOUND(id), {}, HTTP_STATUS.NOT_FOUND);
+   }
    return courier;
 };
 
-const update = (id, changes) => {
-   // Placeholder implementation
-   if (id != 1) throw error(APP_MESSAGES.COURIER.NOT_FOUND(id), {}, HTTP_STATUS.NOT_FOUND);
-   const updatedCourier = { id, ...changes };
-   return updatedCourier;
+const update = async (id, changes) => {
+   const actualCourier = await CourierRepository.findOneById(id);
+   if (!actualCourier) {
+      throw error(APP_MESSAGES.COURIER.NOT_FOUND(id), {}, HTTP_STATUS.NOT_FOUND);
+   }
+   const { newData, oldData } = comparateChanges(changes, actualCourier.toJSON());
+   const { email, phone, vehicle_id } = newData;
+   if(email) await existCourierEmail(email);
+   if(phone) await existCourierPhone(phone);
+   if(vehicle_id) await existVehicleType(vehicle_id);
+   const updatedFields = Object.keys(newData);
+   await CourierRepository.update(id, newData);
+   return {
+      updated_fields: updatedFields,
+      old_values: oldData,
+      new_values: newData
+   };
 };
 
-const remove = id => {
-   // Placeholder implementation
-   if (id != 1) throw error(APP_MESSAGES.COURIER.NOT_FOUND(id), {}, HTTP_STATUS.NOT_FOUND);
+const changePassword = async (id, newPassword) => {
+   const courrier = await CourierRepository.findOneById(id);
+   if (!courrier) {
+      throw error(APP_MESSAGES.COURIER.NOT_FOUND(id), {}, HTTP_STATUS.NOT_FOUND);
+   }
+   const passwordHash = await bcrypt.hash(newPassword, 10);
+   await CourierRepository.update(id, { password: passwordHash });
    return;
 };
 
-const changePassword = (id, _newPassword) => {
-   // Placeholder implementation
-   if (id != 1) throw error(APP_MESSAGES.COURIER.NOT_FOUND(id), {}, HTTP_STATUS.NOT_FOUND);
-   return;
-};
-
-const changeStatus = (id, _newStatus) => {
-   // Placeholder implementation
-   if (id != 1) throw error(APP_MESSAGES.COURIER.NOT_FOUND(id), {}, HTTP_STATUS.NOT_FOUND);
+const changeStatus = async (id, newStatus) => {
+   const courier = await CourierRepository.findOneById(id);
+   if (!courier) {
+      throw error(APP_MESSAGES.COURIER.NOT_FOUND(id), {}, HTTP_STATUS.NOT_FOUND);
+   }
+   const { status } = courier.toJSON();
+   if (status === newStatus) {
+      throw error(APP_MESSAGES.COURIER.STATUS_ALREADY_SET(id, newStatus));
+   }
+   await CourierRepository.update(id, { status: newStatus });
    return;
 };
 
@@ -61,7 +89,6 @@ export default {
     create,
     getById,
     update,
-    remove,
     changePassword,
     changeStatus,
 };

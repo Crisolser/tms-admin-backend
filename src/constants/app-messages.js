@@ -64,6 +64,12 @@ export const APP_MESSAGES = {
       PASSWORD_CHANGED: id => `Contraseña del mensajero con ID ${id} cambiada correctamente`,
       STATUS_CHANGED: (id, statusId) => `Estado del mensajero con ID ${id} cambiado a ${statusId} correctamente`,
       GET_PACKAGES: 'Paquetes obtenidos correctamente',
+      EMAIL_ALREADY_EXISTS: email => `El correo electrónico ${email} ya está registrado para otro mensajero`,
+      PHONE_ALREADY_EXISTS: phone => `El teléfono ${phone} ya está registrado para otro mensajero`,
+      STATUS_ALREADY_SET: (id, statusId) => `El mensajero con ID ${id} ya tiene el estado ${statusId}`,
+   },
+   VEHICLE_TYPE: {
+      NOT_FOUND: id => `Tipo de vehículo con ID ${id} no encontrado`,
    },
    ROLE: {
       GET_LIST: 'Lista de roles obtenida',
