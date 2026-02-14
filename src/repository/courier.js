@@ -1,7 +1,7 @@
 import { Op } from 'sequelize';
 import models from '#models';
 
-const { Courier, Vehicle } = models;
+const { Courier, Vehicle, Client, ClientWarehouse } = models;
 
 const findMany = async filters => {
     const { page, limit, id, email, phone, status } = filters;
@@ -90,6 +90,43 @@ const update = async (id, changes) => {
     await Courier.update(changes, { where: { id } });
 };
 
+const getPackages = async (id,packageStatusIds) => {
+    const courier = await Courier.findByPk(id);
+    const packages = await courier.getPackages({
+        where: {
+            package_status_id: {
+                [Op.in]: packageStatusIds
+            }
+        },
+        attributes: [
+            'id',
+            'address',
+            'latitude',
+            'longitude',
+            'internal_id',
+            'package_status_id',
+            'finished_at'
+        ],
+        include: [
+            {
+                model: Client,
+                attributes: ['id', 'name'],
+                as: 'client'
+            },
+            {
+                model: ClientWarehouse,
+                attributes: ['id', 'code', 'description'],
+                as: 'warehouse'
+            }
+        ],
+        limit: 200,
+        order: [
+            ['finished_at', 'DESC'],
+            ['id', 'DESC']
+        ]
+    });
+    return packages;
+}
 
 export default {
     findMany,
@@ -98,5 +135,6 @@ export default {
     findOneById,
     findVehicleTypeById,
     create,
-    update
+    update,
+    getPackages
 };

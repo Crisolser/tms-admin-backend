@@ -4,6 +4,6 @@ export const COURIER_PACKAGE_TYPES_STATUS = {
 };
 
 export const COURIER_PACKAGE_TYPES = [
-    "ACTIVE",
-    "COMPLETED"
+    "active",
+    "completed"
 ]

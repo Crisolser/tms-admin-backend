@@ -13,6 +13,7 @@ export const validateRequest = (schema, scope) => (req, res, next) => {
          const { message, code } = issue;
 
          const issueFormatted = {
+            scope,
             message,
             parameter: fullPath.length > 0 ? fullPath : undefined,
          };

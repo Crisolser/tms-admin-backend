@@ -7,7 +7,7 @@ import {
     updateCourier,
     changeCourierPassword,
     changeCourierStatus,
-    getCourierPackages
+    getCourierPackages,
 } from '#couriersmodule/controller/courier-controller';
 import {
     ListCouriersSchema,
@@ -15,7 +15,8 @@ import {
     GetCourierSchema,
     UpdateCourierSchema,
     ChangePasswordSchema,
-    ChangeStatusSchema
+    ChangeStatusSchema,
+    GetCourierPackagesSchema
 } from '#couriersmodule/schemas/index'
 
 const router = Router();
@@ -62,6 +63,7 @@ router.patch(
 router.get(
     '/:courierId/packages/:type',
     validatePermission('courier:read'),
+    validateRequest(GetCourierPackagesSchema, 'params'),
     getCourierPackages
 );
 

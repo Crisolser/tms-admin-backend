@@ -73,13 +73,12 @@ export const changeCourierPassword = async (req, res, next) => {
    }
 };
 
-export const getCourierPackages = (req, res, next) => {
+export const getCourierPackages = async (req, res, next) => {
    try {
-        const { courierId, type } = req.params;
-        // Placeholder implementation, replace with actual service call
-        const packages = [];
+        const { courierId, type } = req.validated.params;
+        const packages = await CourierService.getCourierPackages(courierId, type);
         const message = APP_MESSAGES.COURIER.GET_PACKAGES;
-        const additionalData = { courierId, type, packages };
+        const additionalData = { type, packages };
         return successHandler(req, res, { message, additionalData });
    } catch (err) {
       return next(err);

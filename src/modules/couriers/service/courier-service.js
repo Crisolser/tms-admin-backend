@@ -1,16 +1,18 @@
 import bcrypt from 'bcrypt';
 import { error } from '#helpers';
-import { APP_MESSAGES, HTTP_STATUS } from '#constants';
+import { APP_MESSAGES } from '#constants';
 import { createPagination } from '#helpers';
 import CourierRepository from '#repository/courier'
 import {
    existCourierEmail,
    existCourierPhone,
    existVehicleType,
+   existCourier
 } from '#couriersmodule/core/index';
 import {
    comparateChanges
 } from '#helpers';
+import { COURIER_PACKAGE_TYPES_STATUS } from '#enums';
 
 const getAll = async query => {
    const { limit, page, ...filters } = query 
@@ -35,18 +37,12 @@ const create = async data => {
 };
 
 const getById = id => {
-   const courier = CourierRepository.findOneById(id);
-   if (!courier) {
-      throw error(APP_MESSAGES.COURIER.NOT_FOUND(id), {}, HTTP_STATUS.NOT_FOUND);
-   }
+   const courier = existCourier(id);
    return courier;
 };
 
 const update = async (id, changes) => {
-   const actualCourier = await CourierRepository.findOneById(id);
-   if (!actualCourier) {
-      throw error(APP_MESSAGES.COURIER.NOT_FOUND(id), {}, HTTP_STATUS.NOT_FOUND);
-   }
+   const actualCourier = await existCourier(id);
    const { newData, oldData } = comparateChanges(changes, actualCourier.toJSON());
    const { email, phone, vehicle_id } = newData;
    if(email) await existCourierEmail(email);
@@ -62,20 +58,14 @@ const update = async (id, changes) => {
 };
 
 const changePassword = async (id, newPassword) => {
-   const courrier = await CourierRepository.findOneById(id);
-   if (!courrier) {
-      throw error(APP_MESSAGES.COURIER.NOT_FOUND(id), {}, HTTP_STATUS.NOT_FOUND);
-   }
+   await existCourier(id);
    const passwordHash = await bcrypt.hash(newPassword, 10);
    await CourierRepository.update(id, { password: passwordHash });
    return;
 };
 
 const changeStatus = async (id, newStatus) => {
-   const courier = await CourierRepository.findOneById(id);
-   if (!courier) {
-      throw error(APP_MESSAGES.COURIER.NOT_FOUND(id), {}, HTTP_STATUS.NOT_FOUND);
-   }
+   const courier = await existCourier(id);
    const { status } = courier.toJSON();
    if (status === newStatus) {
       throw error(APP_MESSAGES.COURIER.STATUS_ALREADY_SET(id, newStatus));
@@ -84,11 +74,19 @@ const changeStatus = async (id, newStatus) => {
    return;
 };
 
+const getCourierPackages = async (courierId, type) => {
+   await existCourier(courierId);
+   const packageStatusIds = COURIER_PACKAGE_TYPES_STATUS[type.toUpperCase()];
+   const packages = await CourierRepository.getPackages(courierId, packageStatusIds);
+   return packages;
+}
+
 export default {
-    getAll,
-    create,
-    getById,
-    update,
-    changePassword,
-    changeStatus,
+   getAll,
+   create,
+   getById,
+   update,
+   changePassword,
+   changeStatus,
+   getCourierPackages
 };
