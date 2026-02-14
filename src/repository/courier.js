@@ -90,7 +90,7 @@ const update = async (id, changes) => {
     await Courier.update(changes, { where: { id } });
 };
 
-const getPackages = async (id,packageStatusIds) => {
+const getPackages = async (id, packageStatusIds) => {
     const courier = await Courier.findByPk(id);
     const packages = await courier.getPackages({
         where: {
