@@ -5,6 +5,7 @@ import {
    insertClients,
    insertWarehouses,
    insertCouriers,
+   insertPackages
 } from '#dummy-data';
 
 const insertDummyData = async () => {
@@ -14,6 +15,7 @@ const insertDummyData = async () => {
    await insertClients();
    await insertWarehouses();
    await insertCouriers();
+   await insertPackages();
 };
 
 export default insertDummyData;
