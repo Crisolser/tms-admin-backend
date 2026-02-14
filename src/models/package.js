@@ -30,6 +30,10 @@ const Package = sequelize.define(
          type: DataTypes.STRING(10),
          allowNull: true,
       },
+      coordinates: {
+         type: DataTypes.GEOMETRY('POINT'),
+         allowNull: true,
+      },
       latitude: {
          type: DataTypes.DECIMAL(10, 8),
          allowNull: true,
@@ -74,7 +78,7 @@ const Package = sequelize.define(
       },
       updated_at: {
          type: DataTypes.DATE,
-         allowNull: false,
+         allowNull: true,
       },
       finished_at: {
          type: DataTypes.DATE,

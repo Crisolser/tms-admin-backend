@@ -57,4 +57,10 @@ export const SEEDER_MESSAGES = {
       INSERTED: COUNT => `--- ✅ ${COUNT} mensajeros insertados correctamente.`,
       ERROR: error => `--- ❌ Error al insertar mensajeros: ${error}`,
    },
+   PACKAGES: {
+      INSERTING: '--- 🚀 Insertando paquetes',
+      ALREADY_EXISTS: '--- ↩️ Paquetes ya existen, no se insertaron nuevamente.',
+      INSERTED: COUNT => `--- ✅ ${COUNT} paquetes insertados correctamente.`,
+      ERROR: error => `--- ❌ Error al insertar paquetes: ${error}`,
+   },
 };

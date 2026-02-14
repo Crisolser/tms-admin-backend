@@ -1,0 +1,322 @@
+[
+    {
+        "tracking_number": "PKG123456789",
+        "client_id": 1,
+        "courier_id": 1,
+        "client_warehouse_id": 1,
+        "address": "123 Main St, Cityville",
+        "zip_code": "12345",
+        "coordinates": {
+            "type": "Point",
+            "coordinates": [-122.4194, 37.7749]
+        },
+        "latitude": 37.7749,
+        "longitude": -122.4194,
+        "contact_person": "John Doe",
+        "contact_phone": "5524200932",
+        "references": "Fragile, handle with care",
+        "additional_instructions": "Leave at the front door if no answer",
+        "internal_id": "INT123456789",
+        "package_status_id": 3
+    },
+    {
+        "tracking_number": "PKG987654321",
+        "client_id": 1,
+        "courier_id": 1,
+        "client_warehouse_id": 1,
+        "address": "456 Elm St, Townsville",
+        "zip_code": "54321",
+        "coordinates": {
+            "type": "Point",
+            "coordinates": [-74.0060, 40.7128]
+        },
+        "latitude": 40.7128,
+        "longitude": -74.0060,
+        "contact_person": "Jane Smith",
+        "contact_phone": "5512345678",
+        "references": "Keep upright",
+        "additional_instructions": "Ring the doorbell twice",
+        "internal_id": "INT987654321",
+        "package_status_id": 4
+    },
+    {
+        "tracking_number": "PKG555555555",
+        "client_id": 1,
+        "courier_id": 1,
+        "client_warehouse_id": 1,
+        "address": "789 Oak St, Villagetown",
+        "zip_code": "67890",
+        "coordinates": {
+            "type": "Point",
+            "coordinates": [-118.2437, 34.0522]
+        },
+        "latitude": 34.0522,
+        "longitude": -118.2437,
+        "contact_person": "Alice Johnson",
+        "contact_phone": "5534567890",
+        "references": "Perishable, keep refrigerated",
+        "additional_instructions": "Call upon arrival",
+        "internal_id": "INT555555555",
+        "package_status_id": 6
+    },
+    {
+        "tracking_number": "PKG111111111",
+        "client_id": 1,
+        "courier_id": 1,
+        "client_warehouse_id": 1,
+        "address": "321 Pine St, Hamletville",
+        "zip_code": "98765",
+        "coordinates": {
+            "type": "Point",
+            "coordinates": [-87.6298, 41.8781]
+        },
+        "latitude": 41.8781,
+        "longitude": -87.6298,
+        "contact_person": "Bob Brown",
+        "contact_phone": "5545678901",
+        "references": "Heavy, requires two people to lift",
+        "additional_instructions": "Deliver to the back door",
+        "internal_id": "INT111111111",
+        "package_status_id": 3
+    },
+    {
+        "tracking_number": "PKG222222222",
+        "client_id": 1,
+        "courier_id": 1,
+        "client_warehouse_id": 1,
+        "address": "654 Cedar St, Suburbia",
+        "zip_code": "24680",
+        "coordinates": {
+            "type": "Point",
+            "coordinates": [-95.3698, 29.7604]
+        },
+        "latitude": 29.7604,
+        "longitude": -95.3698,
+        "contact_person": "Charlie Davis",
+        "contact_phone": "5556789012",
+        "references": "Flammable, keep away from heat sources",
+        "additional_instructions": "Leave with the neighbor if no answer",
+        "internal_id": "INT222222222",
+        "package_status_id": 4
+    },
+    {
+        "tracking_number": "PKG333333333",
+        "client_id": 1,
+        "courier_id": 1,
+        "client_warehouse_id": 1,
+        "address": "987 Birch St, Metropolis",
+        "zip_code": "13579",
+        "coordinates": {
+            "type": "Point",
+            "coordinates": [-80.1918, 25.7617]
+        },
+        "latitude": 25.7617,
+        "longitude": -80.1918,
+        "contact_person": "Diana Evans",
+        "contact_phone": "5567890123",
+        "references": "Electronic device, handle with care",
+        "additional_instructions": "Deliver to the front desk",
+        "internal_id": "INT333333333",
+        "package_status_id": 6
+    },
+    {
+        "tracking_number": "PKG444444444",
+        "client_id": 1,
+        "courier_id": 1,
+        "client_warehouse_id": 1,
+        "address": "246 Maple St, Smalltown",
+        "zip_code": "86420",
+        "coordinates": {
+            "type": "Point",
+            "coordinates": [-122.3321, 47.6062]
+        },
+        "latitude": 47.6062,
+        "longitude": -122.3321,
+        "contact_person": "Ethan Foster",
+        "contact_phone": "5578901234",
+        "references": "Clothing, fold neatly",
+        "additional_instructions": "Leave in the mailbox if no answer",
+        "internal_id": "INT444444444",
+        "package_status_id": 3
+    },
+    {
+        "tracking_number": "PKG666666666",
+        "client_id": 1,
+        "courier_id": 1,
+        "client_warehouse_id": 1,
+        "address": "135 Spruce St, Citytown",
+        "zip_code": "97531",
+        "coordinates": {
+            "type": "Point",
+            "coordinates": [-71.0589, 42.3601]
+        },
+        "latitude": 42.3601,
+        "longitude": -71.0589,
+        "contact_person": "Fiona Green",
+        "contact_phone": "5589012345",
+        "references": "Books, stack carefully",
+        "additional_instructions": "Deliver to the side entrance",
+        "internal_id": "INT666666666",
+        "package_status_id": 3
+    },
+    {
+        "tracking_number": "PKG777777777",
+        "client_id": 1,
+        "courier_id": 1,
+        "client_warehouse_id": 1,
+        "address": "864 Willow St, Towncity",
+        "zip_code": "75319",
+        "coordinates": {
+            "type": "Point",
+            "coordinates": [-104.9903, 39.7392]
+        },
+        "latitude": 39.7392,
+        "longitude": -104.9903,
+        "contact_person": "George Harris",
+        "contact_phone": "5590123456",
+        "references": "Toys, keep away from small children",
+        "additional_instructions": "Leave with the receptionist if no answer",
+        "internal_id": "INT777777777",
+        "package_status_id": 5
+    },
+    {
+        "tracking_number": "PKG888888888",
+        "client_id": 1,
+        "courier_id": 1,
+        "client_warehouse_id": 1,
+        "address": "753 Aspen St, Villagetown",
+        "zip_code": "15937",
+        "coordinates": {
+            "type": "Point",
+            "coordinates": [-90.0715, 29.9511]
+        },
+        "latitude": 29.9511,
+        "longitude": -90.0715,
+        "contact_person": "Hannah Lee",
+        "contact_phone": "5501234567",
+        "references": "Garden supplies, keep dry",
+        "additional_instructions": "Deliver to the garage",
+        "internal_id": "INT888888888",
+        "package_status_id": 7
+    },
+    {
+        "tracking_number": "PKG999999999",
+        "client_id": 1,
+        "courier_id": 1,
+        "client_warehouse_id": 1,
+        "address": "159 Chestnut St, Suburbia",
+        "zip_code": "35791",
+        "coordinates": {
+            "type": "Point",
+            "coordinates": [-85.7585, 38.2527]
+        },
+        "latitude": 38.2527,
+        "longitude": -85.7585,
+        "contact_person": "Ian Martinez",
+        "contact_phone": "5512345678",
+        "references": "Sports equipment, handle with care",
+        "additional_instructions": "Leave at the back porch if no answer",
+        "internal_id": "INT999999999",
+        "package_status_id": 5
+    },
+    {
+        "tracking_number": "PKG000000000",
+        "client_id": 1,
+        "courier_id": 1,
+        "client_warehouse_id": 1,
+        "address": "753 Pineapple St, Cityville",
+        "zip_code": "24680",
+        "coordinates": {
+            "type": "Point",
+            "coordinates": [-122.4194, 37.7749]
+        },
+        "latitude": 37.7749,
+        "longitude": -122.4194,
+        "contact_person": "Jack Wilson",
+        "contact_phone": "5523456789",
+        "references": "Food items, keep refrigerated",
+        "additional_instructions": "Call upon arrival",
+        "internal_id": "INT000000000",
+        "package_status_id": 7
+    },
+    {
+        "tracking_number": "PKG112233445",
+        "client_id": 1,
+        "courier_id": 1,
+        "client_warehouse_id": 1,
+        "address": "321 Mango St, Townsville",
+        "zip_code": "54321",
+        "coordinates": {
+            "type": "Point",
+            "coordinates": [-74.0060, 40.7128]
+        },
+        "latitude": 40.7128,
+        "longitude": -74.0060,
+        "contact_person": "Karen Thompson",
+        "contact_phone": "5534567890",
+        "references": "Office supplies, keep dry",
+        "additional_instructions": "Deliver to the front desk",
+        "internal_id": "INT112233445",
+        "package_status_id": 5
+    },
+    {
+        "tracking_number": "PKG556677889",
+        "client_id": 1,
+        "courier_id": 1,
+        "client_warehouse_id": 1,
+        "address": "654 Peach St, Villagetown",
+        "zip_code": "67890",
+        "coordinates": {
+            "type": "Point",
+            "coordinates": [-118.2437, 34.0522]
+        },
+        "latitude": 34.0522,
+        "longitude": -118.2437,
+        "contact_person": "Leo Anderson",
+        "contact_phone": "5545678901",
+        "references": "Furniture, requires assembly",
+        "additional_instructions": "Leave at the front porch if no answer",
+        "internal_id": "INT556677889",
+        "package_status_id": 7
+    },
+    {
+        "tracking_number": "PKG998877665",
+        "client_id": 1,
+        "courier_id": 1,
+        "client_warehouse_id": 1,
+        "address": "987 Plum St, Metropolis",
+        "zip_code": "13579",
+        "coordinates": {
+            "type": "Point",
+            "coordinates": [-80.1918, 25.7617]
+        },
+        "latitude": 25.7617,
+        "longitude": -80.1918,
+        "contact_person": "Mia Roberts",
+        "contact_phone": "5556789012",
+        "references": "Pet supplies, keep away from children",
+        "additional_instructions": "Deliver to the back door",
+        "internal_id": "INT998877665",
+        "package_status_id": 5
+    },
+    {
+        "tracking_number": "PKG443322110",
+        "client_id": 1,
+        "courier_id": 1,
+        "client_warehouse_id": 1,
+        "address": "246 Orange St, Suburbia",
+        "zip_code": "24680",
+        "coordinates": {
+            "type": "Point",
+            "coordinates": [-95.3698, 29.7604]
+        },
+        "latitude": 29.7604,
+        "longitude": -95.3698,
+        "contact_person": "Nina Scott",
+        "contact_phone": "5567890123",
+        "references": "Cleaning supplies, keep away from children",
+        "additional_instructions": "Leave with the neighbor if no answer",
+        "internal_id": "INT443322110",
+        "package_status_id": 7
+    }
+]
