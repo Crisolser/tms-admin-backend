@@ -39,7 +39,8 @@
       "#adminsmodule/*": "./src/modules/admins/*.js",
       "#clientsmodule/*": "./src/modules/clients/*.js",
       "#couriersmodule/*": "./src/modules/couriers/*.js",
-      "#rolesmodule/*": "./src/modules/roles/*.js"
+      "#rolesmodule/*": "./src/modules/roles/*.js",
+      "#integrations/*": "./src/integrations/*.js"
    },
    "dependencies": {
       "@aws-sdk/client-s3": "^3.990.0",

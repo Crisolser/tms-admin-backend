@@ -12,7 +12,10 @@ import {
 import {
    comparateChanges
 } from '#helpers';
+import S3Integration from '#integrations/aws-s3/index';
 import { COURIER_PACKAGE_TYPES_STATUS } from '#enums';
+
+const courierFolder = 'courier_profile_photos';
 
 const getAll = async query => {
    const { limit, page, ...filters } = query 
@@ -36,8 +39,13 @@ const create = async data => {
    return courierId;
 };
 
-const getById = id => {
-   const courier = existCourier(id);
+const getById = async id => {
+   const courier = await existCourier(id);
+   const { profile_photo } = courier.toJSON();
+   if(profile_photo) {
+      const filePath = `${courierFolder}/${profile_photo}`;
+      courier.profile_photo = await S3Integration.getFileUrl(filePath);
+   }
    return courier;
 };
 
@@ -81,6 +89,30 @@ const getCourierPackages = async (courierId, type) => {
    return packages;
 }
 
+const createUrlForProfilePhoto = async (courierId, data) => {
+   await existCourier(courierId);
+   const { mime_type } = data;
+   const type = mime_type.split('/')[1];
+   const now = Date.now();
+   const dateUnix = Math.floor(now / 1000);
+   const fileName = `${courierId}-${dateUnix}.${type}`;
+   const fullPath = `${courierFolder}/${fileName}`;
+   const url = await S3Integration.getSignedUrlForUpdate(fullPath, mime_type);
+   return { url, file_name: fullPath };
+};
+
+const confirmProfilePhotoUpload = async (courierId, fileName) => {
+   const courier = await existCourier(courierId);
+   const { profile_photo } = courier.toJSON();
+   const actualFilePath = `${courierFolder}/${profile_photo}`;
+   const fullPath = `${courierFolder}/${fileName}`;
+   if(profile_photo) await S3Integration.deleteFile(actualFilePath);
+   await S3Integration.existFile(fullPath);
+   const fileUrl = S3Integration.getFileUrl(fullPath);
+   await CourierRepository.update(courierId, { profile_photo: fileName });
+   return fileUrl;
+};
+
 export default {
    getAll,
    create,
@@ -88,5 +120,7 @@ export default {
    update,
    changePassword,
    changeStatus,
-   getCourierPackages
+   getCourierPackages,
+   createUrlForProfilePhoto,
+   confirmProfilePhotoUpload
 };

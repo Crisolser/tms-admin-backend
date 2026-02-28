@@ -84,3 +84,29 @@ export const getCourierPackages = async (req, res, next) => {
       return next(err);
    }
 };
+
+export const createUrlForProfilePhoto = async (req, res, next) => {
+   try {
+        const { courierId } = req.validated.params;
+        const data = req.validated.body;
+        const urlData = await CourierService.createUrlForProfilePhoto(courierId, data);
+        const message = APP_MESSAGES.COURIER.PROFILE_PHOTO_URL_CREATED(courierId);
+        const additionalData = { ...urlData };
+        return successHandler(req, res, { message, additionalData });
+   } catch (err) {
+      return next(err);
+   }
+};
+
+export const confirmProfilePhotoUpload = async (req, res, next) => {
+   try {
+        const { courierId } = req.validated.params;
+        const { file_name } = req.body;
+        const fileUrl = await CourierService.confirmProfilePhotoUpload(courierId, file_name);
+        const message = APP_MESSAGES.COURIER.PROFILE_PHOTO_UPDATED(courierId);
+        const additionalData = { profile_photo_url: fileUrl };
+        return successHandler(req, res, { message, additionalData });
+   } catch (err) {
+      return next(err);
+   }
+};
