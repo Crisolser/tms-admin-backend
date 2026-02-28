@@ -48,6 +48,38 @@ const envSchema = z.object({
                : 'La contraseña de la base de datos debe ser una cadena',
       })
       .min(1, 'La contraseña de la base de datos no puede estar vacía'),
+   AWS_ACCESS_KEY_ID: z
+      .string({
+         error: issue =>
+            issue.input === undefined
+               ? 'La clave de acceso de AWS es obligatoria'
+               : 'La clave de acceso de AWS debe ser una cadena',
+      })
+      .min(1, 'La clave de acceso de AWS no puede estar vacía'),
+   AWS_SECRET_ACCESS_KEY: z
+      .string({
+         error: issue =>
+            issue.input === undefined
+               ? 'La clave secreta de AWS es obligatoria'
+               : 'La clave secreta de AWS debe ser una cadena',
+      })
+      .min(1, 'La clave secreta de AWS no puede estar vacía'),
+   AWS_REGION: z
+      .string({
+         error: issue =>
+            issue.input === undefined
+               ? 'La región de AWS es obligatoria'
+               : 'La región de AWS debe ser una cadena',
+      })
+      .min(1, 'La región de AWS no puede estar vacía'),
+   AWS_S3_BUCKET: z
+      .string({
+         error: issue =>
+            issue.input === undefined
+               ? 'El nombre del bucket de AWS S3 es obligatorio'
+               : 'El nombre del bucket de AWS S3 debe ser una cadena',
+      })
+      .min(1, 'El nombre del bucket de AWS S3 no puede estar vacío'),
    AUTH_ACCESS_TOKEN_EXPIRATION: z
       .string()
       .regex(/^\d+[smhd]$/, {
