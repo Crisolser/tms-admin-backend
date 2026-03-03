@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import { error } from '#helpers';
-import { APP_MESSAGES } from '#constants';
+import { APP_MESSAGES, S3_FOLDERS } from '#constants';
 import { createPagination } from '#helpers';
 import CourierRepository from '#repository/courier'
 import {
@@ -15,7 +15,7 @@ import {
 import S3Integration from '#integrations/aws-s3/index';
 import { COURIER_PACKAGE_TYPES_STATUS } from '#enums';
 
-const courierFolder = 'courier_profile_photos';
+const { COURIER_PROFILE_PHOTOS } = S3_FOLDERS;
 
 const getAll = async query => {
    const { limit, page, ...filters } = query 
@@ -43,7 +43,7 @@ const getById = async id => {
    const courier = await existCourier(id);
    const { profile_photo } = courier.toJSON();
    if(profile_photo) {
-      const filePath = `${courierFolder}/${profile_photo}`;
+      const filePath = `${COURIER_PROFILE_PHOTOS}/${profile_photo}`;
       courier.profile_photo = await S3Integration.getFileUrl(filePath);
    }
    return courier;
@@ -96,19 +96,19 @@ const createUrlForProfilePhoto = async (courierId, data) => {
    const now = Date.now();
    const dateUnix = Math.floor(now / 1000);
    const fileName = `${courierId}-${dateUnix}.${type}`;
-   const fullPath = `${courierFolder}/${fileName}`;
+   const fullPath = `${COURIER_PROFILE_PHOTOS}/${fileName}`;
    const url = await S3Integration.getSignedUrlForUpdate(fullPath, mime_type);
-   return { url, file_name: fullPath };
+   return { url, file_name: fileName, mime_type };
 };
 
 const confirmProfilePhotoUpload = async (courierId, fileName) => {
    const courier = await existCourier(courierId);
    const { profile_photo } = courier.toJSON();
-   const actualFilePath = `${courierFolder}/${profile_photo}`;
-   const fullPath = `${courierFolder}/${fileName}`;
+   const actualFilePath = `${COURIER_PROFILE_PHOTOS}/${profile_photo}`;
+   const fullPath = `${COURIER_PROFILE_PHOTOS}/${fileName}`;
    if(profile_photo) await S3Integration.deleteFile(actualFilePath);
    await S3Integration.existFile(fullPath);
-   const fileUrl = S3Integration.getFileUrl(fullPath);
+   const fileUrl = await S3Integration.getFileUrl(fullPath);
    await CourierRepository.update(courierId, { profile_photo: fileName });
    return fileUrl;
 };

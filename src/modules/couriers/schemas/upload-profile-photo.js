@@ -3,7 +3,7 @@ import { MIME_TYPES } from '#constants';
 
 const mimeTypeOptionsText = MIME_TYPES.COURIER_PROFILE_PHOTO.map(type => `${type}`).join(', ');
 
-export const createUrlForProfilePhotoSchema = z.object({
+export const CreateUrlForProfilePhotoSchema = z.object({
     mime_type: z
         .string()
         .refine(value => MIME_TYPES.COURIER_PROFILE_PHOTO.includes(value), {

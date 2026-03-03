@@ -8,7 +8,6 @@ import s3Client from './s3-client.js';
 const { AWS_S3_BUCKET } = env;
 
 export async function existFile(fileName) {
-    console.log(fileName);
     const command = new HeadObjectCommand({
         Bucket: AWS_S3_BUCKET,
         Key: fileName,

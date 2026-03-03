@@ -19,7 +19,8 @@ import {
     ChangePasswordSchema,
     ChangeStatusSchema,
     GetCourierPackagesSchema,
-    createUrlForProfilePhotoSchema,
+    CreateUrlForProfilePhotoSchema,
+    ConfirmProfilePhotoUploadSchema
 } from '#couriersmodule/schemas/index'
 
 const router = Router();
@@ -74,7 +75,7 @@ router.post(
     '/:courierId/profile-photo/',
     validatePermission('courier:update'),
     validateRequest(GetCourierSchema, 'params'),
-    validateRequest(createUrlForProfilePhotoSchema, 'body'),
+    validateRequest(CreateUrlForProfilePhotoSchema, 'body'),
     createUrlForProfilePhoto  
 
 );
@@ -83,6 +84,7 @@ router.post(
     '/:courierId/profile-photo/confirm',
     validatePermission('courier:update'),
     validateRequest(GetCourierSchema, 'params'),
+    validateRequest(ConfirmProfilePhotoUploadSchema, 'body'),
     confirmProfilePhotoUpload
 );
 

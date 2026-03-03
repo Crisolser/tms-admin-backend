@@ -8,10 +8,11 @@ import s3Client from './s3-client.js';
 
 const { AWS_S3_BUCKET } = env;
 
-export async function getSignedUrlForUpdate(fileName) {
+export async function getSignedUrlForUpdate(fileName, mimeType) {
     const command = new PutObjectCommand({
         Bucket: AWS_S3_BUCKET,
         Key: fileName,
+        ContentType: mimeType
     });
 
     try {
