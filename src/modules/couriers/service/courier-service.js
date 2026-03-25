@@ -20,12 +20,20 @@ const { COURIER_PROFILE_PHOTOS } = S3_FOLDERS;
 const getAll = async query => {
    const { limit, page, ...filters } = query 
    const { couriers, total } = await CourierRepository.findMany(query);
+   const couriersWithPhotoUrl = await Promise.all(couriers.map( async courier => {
+      const { profile_photo } = courier.toJSON();
+      if(profile_photo) {
+         const filePath = `${COURIER_PROFILE_PHOTOS}/${profile_photo}`;
+         courier.profile_photo = await S3Integration.getFileUrl(filePath);
+      }
+      return courier;
+   }));
    const totalPages = Math.ceil(total / limit);
    const pagination = createPagination(limit, page, totalPages, total); 
    return {
       pagination,
       filters,
-      couriers
+      couriers: couriersWithPhotoUrl
    };
 };
 
