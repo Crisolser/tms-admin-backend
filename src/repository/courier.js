@@ -128,6 +128,22 @@ const getPackages = async (id, packageStatusIds) => {
     return packages;
 }
 
+const createDocument = async (courierId, fileName, documentTypeId) => {
+    const courier = await Courier.findByPk(courierId);
+    await courier.createDocument({
+        file_name: fileName,
+        document_type_id: documentTypeId,
+        status:1
+    });
+    return
+}
+
+const getDocuments = async (courierId) => {
+    const courier = await Courier.findByPk(courierId);
+    const documents = await courier.getDocuments();
+    return documents;
+};
+
 export default {
     findMany,
     findOneByEmail,
@@ -136,5 +152,7 @@ export default {
     findVehicleTypeById,
     create,
     update,
-    getPackages
+    getPackages,
+    createDocument,
+    getDocuments
 };

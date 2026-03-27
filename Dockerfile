@@ -1,7 +1,8 @@
 # --- Base ---
-FROM node:22.17.1 AS base
+FROM node:22-alpine AS base
 WORKDIR /app
-COPY package*.json ./
+COPY package.json ./
+COPY package-lock.json ./
 
 # --- Local ---
 FROM base AS local

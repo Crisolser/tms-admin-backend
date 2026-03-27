@@ -23,6 +23,7 @@
    },
    "homepage": "https://github.com/Crisolser/tms-admin-backend#readme",
    "imports": {
+      "#env": "./.env",
       "#config/*": "./src/config/*.js",
       "#models": "./src/models/index.js",
       "#middlewares": "./src/middlewares/index.js",
@@ -39,9 +40,12 @@
       "#adminsmodule/*": "./src/modules/admins/*.js",
       "#clientsmodule/*": "./src/modules/clients/*.js",
       "#couriersmodule/*": "./src/modules/couriers/*.js",
-      "#rolesmodule/*": "./src/modules/roles/*.js"
+      "#rolesmodule/*": "./src/modules/roles/*.js",
+      "#integrations/*": "./src/integrations/*.js"
    },
    "dependencies": {
+      "@aws-sdk/client-s3": "^3.990.0",
+      "@aws-sdk/s3-request-presigner": "^3.990.0",
       "@scalar/express-api-reference": "^0.8.30",
       "bcrypt": "^6.0.0",
       "cors": "^2.8.5",

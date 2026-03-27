@@ -8,6 +8,11 @@ import {
     changeCourierPassword,
     changeCourierStatus,
     getCourierPackages,
+    createUrlForProfilePhoto,
+    confirmProfilePhotoUpload,
+    createUrlForDocument,
+    confirmDocumentUpload,
+    getCourierDocuments
 } from '#couriersmodule/controller/courier-controller';
 import {
     ListCouriersSchema,
@@ -16,7 +21,11 @@ import {
     UpdateCourierSchema,
     ChangePasswordSchema,
     ChangeStatusSchema,
-    GetCourierPackagesSchema
+    GetCourierPackagesSchema,
+    CreateUrlForProfilePhotoSchema,
+    ConfirmProfilePhotoUploadSchema,
+    CreateUrlForDocumentSchema,
+    ConfirmDocumentUploadSchema
 } from '#couriersmodule/schemas/index'
 
 const router = Router();
@@ -66,5 +75,47 @@ router.get(
     validateRequest(GetCourierPackagesSchema, 'params'),
     getCourierPackages
 );
+
+router.post(
+    '/:courierId/profile-photo/',
+    validatePermission('courier:update'),
+    validateRequest(GetCourierSchema, 'params'),
+    validateRequest(CreateUrlForProfilePhotoSchema, 'body'),
+    createUrlForProfilePhoto  
+
+);
+
+router.post(
+    '/:courierId/profile-photo/confirm',
+    validatePermission('courier:update'),
+    validateRequest(GetCourierSchema, 'params'),
+    validateRequest(ConfirmProfilePhotoUploadSchema, 'body'),
+    confirmProfilePhotoUpload
+);
+
+router.post(
+    '/:courierId/documents',
+    validatePermission('courier:update'),
+    validateRequest(GetCourierSchema, 'params'),
+    validateRequest(CreateUrlForDocumentSchema, 'body'),
+    createUrlForDocument
+);
+
+router.post(
+    '/:courierId/documents/confirm',
+    validatePermission('courier:update'),
+    validateRequest(GetCourierSchema, 'params'),
+    validateRequest(ConfirmDocumentUploadSchema, 'body'),
+    confirmDocumentUpload
+);
+
+router.get(
+    '/:courierId/documents',
+    validatePermission('courier:read'),
+    validateRequest(GetCourierSchema, 'params'),
+    getCourierDocuments
+);
+
+
 
 export default router;

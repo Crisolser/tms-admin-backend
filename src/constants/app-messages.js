@@ -67,6 +67,13 @@ export const APP_MESSAGES = {
       EMAIL_ALREADY_EXISTS: email => `El correo electrónico ${email} ya está registrado para otro mensajero`,
       PHONE_ALREADY_EXISTS: phone => `El teléfono ${phone} ya está registrado para otro mensajero`,
       STATUS_ALREADY_SET: (id, statusId) => `El mensajero con ID ${id} ya tiene el estado ${statusId}`,
+      PROFILE_PHOTO_URL_CREATED: id => `URL para foto de perfil del mensajero con ID ${id} creada correctamente`,
+      PROFILE_PHOTO_UPDATED: id => `Foto de perfil del mensajero con ID ${id} cargada correctamente`,
+      DOCUMENT_URL_CREATED: id => `URL para documento del mensajero con ID ${id} creada correctamente`, 
+      DOCUMENT_TYPE_EXISTS: documentType => `El mensajero ya tiene un documento del tipo ${documentType} registrado`,
+      DOCUMENT_UPDATED: (id, documentType) => `Documento del tipo ${documentType} para el mensajero con ID ${id} cargado correctamente`,
+      FILE_NOT_BELONG_TO_COURIER: (courierId, fileName) => `El archivo ${fileName} no pertenece al mensajero con ID ${courierId}`,
+      GET_DOCUMENTS: id => `Documentos del mensajero con ID ${id} obtenidos correctamente`
    },
    VEHICLE_TYPE: {
       NOT_FOUND: id => `Tipo de vehículo con ID ${id} no encontrado`,
