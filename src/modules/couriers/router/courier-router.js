@@ -9,7 +9,10 @@ import {
     changeCourierStatus,
     getCourierPackages,
     createUrlForProfilePhoto,
-    confirmProfilePhotoUpload
+    confirmProfilePhotoUpload,
+    createUrlForDocument,
+    confirmDocumentUpload,
+    getCourierDocuments
 } from '#couriersmodule/controller/courier-controller';
 import {
     ListCouriersSchema,
@@ -20,7 +23,9 @@ import {
     ChangeStatusSchema,
     GetCourierPackagesSchema,
     CreateUrlForProfilePhotoSchema,
-    ConfirmProfilePhotoUploadSchema
+    ConfirmProfilePhotoUploadSchema,
+    CreateUrlForDocumentSchema,
+    ConfirmDocumentUploadSchema
 } from '#couriersmodule/schemas/index'
 
 const router = Router();
@@ -86,6 +91,29 @@ router.post(
     validateRequest(GetCourierSchema, 'params'),
     validateRequest(ConfirmProfilePhotoUploadSchema, 'body'),
     confirmProfilePhotoUpload
+);
+
+router.post(
+    '/:courierId/documents',
+    validatePermission('courier:update'),
+    validateRequest(GetCourierSchema, 'params'),
+    validateRequest(CreateUrlForDocumentSchema, 'body'),
+    createUrlForDocument
+);
+
+router.post(
+    '/:courierId/documents/confirm',
+    validatePermission('courier:update'),
+    validateRequest(GetCourierSchema, 'params'),
+    validateRequest(ConfirmDocumentUploadSchema, 'body'),
+    confirmDocumentUpload
+);
+
+router.get(
+    '/:courierId/documents',
+    validatePermission('courier:read'),
+    validateRequest(GetCourierSchema, 'params'),
+    getCourierDocuments
 );
 
 

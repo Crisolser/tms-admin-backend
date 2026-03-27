@@ -101,10 +101,48 @@ export const createUrlForProfilePhoto = async (req, res, next) => {
 export const confirmProfilePhotoUpload = async (req, res, next) => {
    try {
         const { courierId } = req.validated.params;
-        const { file_name } = req.body;
+        const { file_name } = req.validated.body;
         const fileUrl = await CourierService.confirmProfilePhotoUpload(courierId, file_name);
         const message = APP_MESSAGES.COURIER.PROFILE_PHOTO_UPDATED(courierId);
         const additionalData = { profile_photo_url: fileUrl };
+        return successHandler(req, res, { message, additionalData });
+   } catch (err) {
+      return next(err);
+   }
+};
+
+export const createUrlForDocument = async (req, res, next) => {
+   try {
+        const { courierId } = req.validated.params;
+        const data = req.validated.body;
+        const documentUrl = await CourierService.createUrlForDocument(courierId, data);
+        const message = APP_MESSAGES.COURIER.DOCUMENT_URL_CREATED(courierId);
+        const additionalData = { ...documentUrl };
+        return successHandler(req, res, { message, additionalData });
+   } catch (err) {
+      return next(err);
+   }
+};
+
+export const confirmDocumentUpload = async (req, res, next) => {
+   try {
+        const { courierId } = req.validated.params;
+        const { file_name, document_type } = req.validated.body;
+        const fileUrl = await CourierService.confirmDocumentUpload(courierId, file_name, document_type);
+        const message = APP_MESSAGES.COURIER.DOCUMENT_UPDATED(courierId, document_type);
+        const additionalData = { document_url: fileUrl };
+        return successHandler(req, res, { message, additionalData });
+   } catch (err) {
+      return next(err);
+   }
+};
+
+export const getCourierDocuments = async (req, res, next) => {
+   try {
+        const { courierId } = req.validated.params;
+        const documents = await CourierService.getCourierDocuments(courierId);
+        const message = APP_MESSAGES.COURIER.GET_DOCUMENTS(courierId);
+        const additionalData = { documents };
         return successHandler(req, res, { message, additionalData });
    } catch (err) {
       return next(err);

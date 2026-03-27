@@ -23,6 +23,7 @@
    },
    "homepage": "https://github.com/Crisolser/tms-admin-backend#readme",
    "imports": {
+      "#env": "./.env",
       "#config/*": "./src/config/*.js",
       "#models": "./src/models/index.js",
       "#middlewares": "./src/middlewares/index.js",

@@ -7,15 +7,20 @@ import {
    existCourierEmail,
    existCourierPhone,
    existVehicleType,
-   existCourier
+   existCourier,
+   existCourierDocumentType
 } from '#couriersmodule/core/index';
+import { getDocumentsDto } from '#couriersmodule/interface/index';
 import {
    comparateChanges
 } from '#helpers';
 import S3Integration from '#integrations/aws-s3/index';
-import { COURIER_PACKAGE_TYPES_STATUS } from '#enums';
+import { COURIER_PACKAGE_TYPES_STATUS, DOCUMENT_IDS } from '#enums';
 
-const { COURIER_PROFILE_PHOTOS } = S3_FOLDERS;
+const { 
+   COURIER_PROFILE_PHOTOS,
+   COURIER_DOCUMENTS
+} = S3_FOLDERS;
 
 const getAll = async query => {
    const { limit, page, ...filters } = query 
@@ -99,27 +104,66 @@ const getCourierPackages = async (courierId, type) => {
 
 const createUrlForProfilePhoto = async (courierId, data) => {
    await existCourier(courierId);
-   const { mime_type } = data;
-   const type = mime_type.split('/')[1];
+   const { mime_type: mimeType } = data;
+   const type = mimeType.split('/')[1];
    const now = Date.now();
    const dateUnix = Math.floor(now / 1000);
    const fileName = `${courierId}-${dateUnix}.${type}`;
    const fullPath = `${COURIER_PROFILE_PHOTOS}/${fileName}`;
-   const url = await S3Integration.getSignedUrlForUpdate(fullPath, mime_type);
-   return { url, file_name: fileName, mime_type };
+   const url = await S3Integration.getSignedUrlForUpdate(fullPath, mimeType);
+   return { url, file_name: fileName, mime_type: mimeType };
 };
 
 const confirmProfilePhotoUpload = async (courierId, fileName) => {
    const courier = await existCourier(courierId);
-   const { profile_photo } = courier.toJSON();
-   const actualFilePath = `${COURIER_PROFILE_PHOTOS}/${profile_photo}`;
+   const { profile_photo: oldProfilePhoto } = courier.toJSON();
+   const actualFilePath = `${COURIER_PROFILE_PHOTOS}/${oldProfilePhoto}`;
    const fullPath = `${COURIER_PROFILE_PHOTOS}/${fileName}`;
-   if(profile_photo) await S3Integration.deleteFile(actualFilePath);
+   if(oldProfilePhoto) await S3Integration.deleteFile(actualFilePath);
    await S3Integration.existFile(fullPath);
    const fileUrl = await S3Integration.getFileUrl(fullPath);
    await CourierRepository.update(courierId, { profile_photo: fileName });
    return fileUrl;
 };
+
+const createUrlForDocument = async (courierId, data) => {
+   await existCourier(courierId);
+   const { mime_type: mimeType, document_type: documentType } = data;
+   await existCourierDocumentType(courierId, documentType);
+   const type = mimeType.split('/')[1];
+   const fileName = `${documentType}-${courierId}-${Date.now()}.${type}`;
+   const fullPath = `${COURIER_DOCUMENTS}/${fileName}`;
+   const url = await S3Integration.getSignedUrlForUpdate(fullPath, mimeType);
+   return { url, file_name: fileName, mime_type: mimeType, document_type: documentType };
+};
+
+const confirmDocumentUpload = async (courierId, fileName, documentType) => {
+   await existCourier(courierId);
+   const courierIdInFile = Number(fileName.split('-')[1]);
+   if (courierId !== courierIdInFile) throw error(APP_MESSAGES.COURIER.FILE_NOT_BELONG_TO_COURIER(courierId, fileName));
+   const fullPath = `${COURIER_DOCUMENTS}/${fileName}`;
+   await S3Integration.existFile(fullPath);
+   const fileUrl = await S3Integration.getFileUrl(fullPath);
+   const documentTypeId = DOCUMENT_IDS[documentType];
+   await CourierRepository.createDocument(courierId, fileName,documentTypeId);
+   return fileUrl;
+};
+
+const getCourierDocuments = async (courierId) => {
+   await existCourier(courierId);
+   const documents = await CourierRepository.getDocuments(courierId);
+   const documentsWithUrl = await Promise.all(documents.map( async document => {
+      const { file_name } = document.toJSON();
+      const filePath = `${COURIER_DOCUMENTS}/${file_name}`;
+      const fileUrl = await S3Integration.getFileUrl(filePath);
+      return {
+         ...document.toJSON(),
+         file_url: fileUrl
+      }
+   }));
+   const sanitizedDocuments = getDocumentsDto(documentsWithUrl);
+   return sanitizedDocuments;
+}
 
 export default {
    getAll,
@@ -130,5 +174,9 @@ export default {
    changeStatus,
    getCourierPackages,
    createUrlForProfilePhoto,
-   confirmProfilePhotoUpload
+   confirmProfilePhotoUpload,
+   createUrlForDocument,
+   confirmDocumentUpload,
+   getCourierDocuments
+
 };
